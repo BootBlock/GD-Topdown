@@ -11,6 +11,9 @@ signal gun_fired(ammo_count: int)
 ## The gun is reloading.
 signal gun_reloading(remaining_clips: int)
 
+## The gun has reloaded.
+signal gun_reloaded(remaining_clips: int)
+
 @export_category("Gun Mechanics")
 ## The firing mode of the gun.
 @export var fire_mode: fire_modes = fire_modes.Semiautomatic
@@ -81,7 +84,7 @@ func _ready() -> void:
 	self.audio_player = $AudioStreamPlayer2D
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if self.gun_sight == gun_sights.Dot:		# This lot should be moved into the GunSightDot node
 		if self.raycast.is_colliding():
 			if !self.gunsight_dot_node.visible:
@@ -93,7 +96,7 @@ func _process(delta: float) -> void:
 				var collision_point = self.raycast.get_collision_point()
 				var distance = origin.distance_to(collision_point)
 
-				# Inverse square law
+				# Inverse square law: make the shot less precise the further away the (potential) hit target
 #				var energy = 1.0 / (1.0 + 25.0 * distance * distance)
 #				print(energy)
 
@@ -151,35 +154,53 @@ func fire_primary() -> bool:
 
 ## Reloads the gun, restoring its current available bullet count to the maximum clip size.
 func reload() -> bool:
+	# The weapon had clips but has now run out, so don't reload.
 	if self.maximum_number_of_clips > 0 and self.remaining_clips == 0:
-		print("Player ran out of clips and so cannot reload.")
+		print("Player ran out of clips and so cannot reload. Skipping reload.")
 		return false
 
-	if self.bullets_per_clip == 0 or self.bullets_remaining_in_clip == self.bullets_per_clip or self.is_reloading:
-		print("No need for a reload; skipping.")
+	if self.bullets_per_clip == 0:
+		print("Unlimited bullets per clip, so reloading isn't required. Skipping reload.")
+		return false
+
+	if self.bullets_remaining_in_clip >= self.bullets_per_clip:
+		print("Current clip is full, so reloading would just be a waste of a clip. Skipping reload.")
+		return false
+
+	if self.is_reloading:
+		print("Already reloading. Skipping additional reload.")
 		return false
 
 	self.is_reloading = true
+	self.gun_reloading.emit(self.remaining_clips)
 
-	if self.maximum_number_of_clips > 0:
-		self.remaining_clips -= 1
-		self.gun_reloading.emit(self.remaining_clips)
-
+	# TODO: If there's no reload sound, then that means is_reloading will
+	# forever be true as there's no stream _finished event to revert it.
 	if self.reload_sound:
 		self.audio_player.stream = self.reload_sound
 		self.audio_player.play()
 
 	# The clip will be reloaded once the sound effect has finished playing.
-
-	# Assume the reload succeeded as we currently only support infinite clips.
 	return true
 
 # This timer allows auto-reloading to be supported.
 func _on_audio_stream_player_2d_finished() -> void:
-	if self.is_reloading:									# Reloading time is based on length of the reload sound effect.
-		print("Reloaded. Current ammo count was " + str(self.bullets_remaining_in_clip) + " and is now " + str(self.bullets_per_clip))
+	print("PLAYED: " + self.audio_player.stream.resource_name)
+	if self.audio_player.stream.resource_name == self.primary_fire_sound.resource_name:				# Sound of primary fire
+		return
+
+	if self.audio_player.stream.resource_name == self.reload_sound.resource_name:					# Sound of reload
+		#if self.is_reloading:		<-- Not needed if we know the reload sound just ended?
+
+		if self.maximum_number_of_clips > 0:
+			self.gun_reloaded.emit(self.remaining_clips)
+			self.remaining_clips -= 1
+
 		self.is_reloading = false
 		self.bullets_remaining_in_clip = self.bullets_per_clip
+
+		print("Reloaded. Current ammo count was " + str(self.bullets_remaining_in_clip) + " and is now " + str(self.bullets_per_clip))
+		return
 
 func _on_primary_fire_timer_timeout() -> void:
 	if self.clip_auto_reloads and self.bullets_remaining_in_clip == 0:
