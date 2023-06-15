@@ -1,5 +1,5 @@
 # Gun.gd
-class_name Gun extends Node2D
+class_name Gun extends Item
 
 enum fire_modes { Semiautomatic, Automatic, Burst }
 enum gun_sights { None, Dot, Full }
@@ -72,7 +72,11 @@ func _ready() -> void:
 	self.player = self.owner as Player
 	self.raycast = $RayCast2D
 	self.gunsight_dot_node = $GunSightDot
-	self.gunsight_dot_light = self.gunsight_dot_node.get_node("PointLight2D")
+
+	# TODO: Remove the gunsight from the gun; it should be a separate scene.
+	if self.gunsight_dot_node:
+		self.gunsight_dot_light = self.gunsight_dot_node.get_node("PointLight2D")
+
 	self.primary_attack_timer = $PrimaryFireTimer
 	self.audio_player = $AudioStreamPlayer2D
 

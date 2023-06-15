@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Items/Pickups/Pickup.gd" id="1_3k4pd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xjrct"]
-size = Vector2(31, 23)
+size = Vector2(61, 15)
 
 [node name="Pickup" type="Node2D"]
 script = ExtResource("1_3k4pd")
@@ -16,4 +16,8 @@ script = ExtResource("1_3k4pd")
 position = Vector2(0.5, 1.5)
 shape = SubResource("RectangleShape2D_xjrct")
 
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+editor_description = "Plays the item pick-up sound."
+
 [connection signal="area_entered" from="PickupArea2D" to="." method="_on_pickup_area_2d_area_entered"]
+[connection signal="finished" from="AudioStreamPlayer2D" to="." method="_on_audio_stream_player_2d_finished"]
