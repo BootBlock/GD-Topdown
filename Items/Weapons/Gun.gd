@@ -152,10 +152,10 @@ func fire_primary() -> bool:
 ## Reloads the gun, restoring its current available bullet count to the maximum clip size.
 func reload() -> bool:
 	if self.maximum_number_of_clips > 0 and self.remaining_clips == 0:
-		print("Player ran out of clips.")
+		print("Player ran out of clips and so cannot reload.")
 		return false
 
-	if (self.bullets_per_clip == 0 or self.bullets_remaining_in_clip == self.bullets_per_clip or self.is_reloading):
+	if self.bullets_per_clip == 0 or self.bullets_remaining_in_clip == self.bullets_per_clip or self.is_reloading:
 		print("No need for a reload; skipping.")
 		return false
 
