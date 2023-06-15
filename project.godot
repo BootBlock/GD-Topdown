@@ -16,19 +16,19 @@ config/features=PackedStringArray("4.1", "Forward Plus")
 
 [autoload]
 
+Utility="*res://utility.gd"
 Config="*res://Configuration.gd"
-GameState="*res://Game.gd"
 System="*res://System/Messages.gd"
+GameState="*res://Game.gd"
 
 [display]
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
 
-[editor]
+[filesystem]
 
-version_control/plugin_name="GitPlugin"
-version_control/autoload_on_startup=true
+import/blender/enabled=false
 
 [input]
 

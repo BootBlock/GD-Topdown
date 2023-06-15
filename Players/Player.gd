@@ -3,15 +3,21 @@ class_name Player extends CharacterBody2D
 
 const ANIMATION_ANIM_LINE_FADE_OUT: String = "aim_line_fade_out"
 
+enum stances { none, pistol, rifle }
+
 @export var info: PlayerInfo
 @export var speed = 125
 
+@onready var stance_idle: Texture2D = preload("res://Players/Player-01-Idle.png")
+@onready var stance_pistol: Texture2D = preload("res://Players/Player-01-PistolStance.png")
+@onready var stance_rifle: Texture2D = preload("res://Players/Player-01-RifleStance.png")
 @onready var flare = preload("res://Items/Weapons/Utility/Flare/Flare.tscn").instantiate()
 
 @onready var stage = get_tree().get_root().get_node("Main")
 @onready var stage_items = stage.get_node("Stage/Items")
 
 @onready var throw_node: Node2D = $ThrowNode
+@onready var weapon_attachment: Node2D = $WeaponAttachment
 @onready var aim_line: Line2D = $AimLine2D
 @onready var aim_line_timer: Timer = $AimLineTimerFadeout
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
@@ -73,3 +79,42 @@ func _on_aim_line_timer_fadeout_timeout() -> void:
 func _on_animation_player_animation_finished(anim_name: String) -> void:
 	if anim_name == self.ANIMATION_ANIM_LINE_FADE_OUT:
 		self.aim_line.visible = false
+
+## Gives an item to the player.
+func give(pickup: Pickup) -> bool:
+	if pickup.item == null:
+		print("Player got a pick-up but it didn't have an Item property set.")
+		return false
+
+	# Pickup.item is a PackedScene, so instantiate it before using.
+	var pickup_item = pickup.item.instantiate()
+
+	if pickup_item is Gun:
+		print("PLAYER GOT GUN " + pickup_item.name)
+
+		Utility.free_children(self.weapon_attachment)
+
+		self.weapon_attachment.add_child(pickup_item)
+		self._set_stance(pickup_item.stance)
+
+	elif pickup_item is Item:
+		print("PLAYER GOT ITEM " + pickup_item.name)
+	else:
+		print("PLAYER GOT AN UNKNOWN ITEM " + pickup_item.name)
+
+	return true
+
+func _set_stance(stance: stances) -> void:
+
+	# TODO: Player.tscn really should have a proper weapon attachment point system
+	#		rather than just offsetting the weapon position and changing the player sprite.
+
+	match stance:
+		stances.none:
+			$Sprite2D.texture = self.stance_idle
+
+		stances.pistol:
+			$Sprite2D.texture = self.stance_pistol
+
+		stances.rifle:
+			$Sprite2D.texture = self.stance_rifle

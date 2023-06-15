@@ -1,9 +1,8 @@
-[gd_scene load_steps=14 format=3 uid="uid://bcpw780vlk7c7"]
+[gd_scene load_steps=13 format=3 uid="uid://bcpw780vlk7c7"]
 
 [ext_resource type="Script" path="res://Players/Player.gd" id="1_kd5br"]
 [ext_resource type="Script" path="res://Players/PlayerInfo.gd" id="2_6x38p"]
-[ext_resource type="Texture2D" uid="uid://bnrlxq18rosmy" path="res://Players/Player-001.png" id="2_diwi0"]
-[ext_resource type="PackedScene" uid="uid://c73uyup8rwif5" path="res://Items/Weapons/Projectiles/SniperRifle/SniperRifle.tscn" id="3_fkmoc"]
+[ext_resource type="Texture2D" uid="uid://d2crqsr4wyq1g" path="res://Players/Player-01-Idle.png" id="3_obstu"]
 [ext_resource type="PackedScene" uid="uid://dju1sdhdnn143" path="res://Players/Name.tscn" id="5_ccnyb"]
 
 [sub_resource type="Resource" id="Resource_bgv36"]
@@ -71,7 +70,7 @@ info = SubResource("Resource_bgv36")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 rotation = 1.5708
-texture = ExtResource("2_diwi0")
+texture = ExtResource("3_obstu")
 
 [node name="Area2D" type="Area2D" parent="."]
 
@@ -112,8 +111,6 @@ position = Vector2(25, 0)
 
 [node name="WeaponAttachment" type="Node2D" parent="."]
 position = Vector2(14, 0)
-
-[node name="SniperRifle" parent="WeaponAttachment" instance=ExtResource("3_fkmoc")]
 
 [node name="Name" parent="." instance=ExtResource("5_ccnyb")]
 position = Vector2(-38, -47)
