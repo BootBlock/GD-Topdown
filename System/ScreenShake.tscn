@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://bfx16aph6ugay"]
+
+[ext_resource type="Script" path="res://System/ScreenShake.gd" id="1_7val0"]
+
+[node name="ScreenShake" type="Node"]
+script = ExtResource("1_7val0")
+
+[node name="FrequencyTimer" type="Timer" parent="."]
+
+[node name="DurationTimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="FrequencyTimer" to="." method="_on_frequency_timer_timeout"]
+[connection signal="timeout" from="DurationTimer" to="." method="_on_duration_timer_timeout"]

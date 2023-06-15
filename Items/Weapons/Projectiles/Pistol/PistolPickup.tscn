@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://cxil4t1bfqf0q"]
+
+[ext_resource type="PackedScene" uid="uid://cgnmnbh5kq1b0" path="res://Items/Pickups/Pickup.tscn" id="1_et6cp"]
+[ext_resource type="Texture2D" uid="uid://ygjkymgc2u42" path="res://Items/Weapons/Projectiles/Pistol/Pistol-Icon.png" id="2_lah6q"]
+
+[node name="PistolPickup" instance=ExtResource("1_et6cp")]
+
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("2_lah6q")

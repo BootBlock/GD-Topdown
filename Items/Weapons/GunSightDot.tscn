@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://duct7fde7hepc"]
+
+[ext_resource type="Script" path="res://Items/Weapons/GunSightDot.gd" id="1_mirqw"]
+[ext_resource type="Texture2D" uid="uid://76l3wdwnkmge" path="res://Graphics/Particles/spotlight_8.png" id="2_oc2gq"]
+
+[node name="GunSightDot" type="Node2D"]
+script = ExtResource("1_mirqw")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+visible = false
+rotation = 1.5708
+color = Color(3, 0, 0, 1)
+energy = 5.0
+texture = ExtResource("2_oc2gq")
+texture_scale = 0.15

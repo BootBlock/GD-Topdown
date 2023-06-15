@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://cttwcasg2pfgu"]
+
+[ext_resource type="Script" path="res://HUD/CombatText/CombatText.gd" id="1_uvyfd"]
+
+[node name="CombatText" type="Node2D"]
+script = ExtResource("1_uvyfd")
+
+[node name="Label" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://diokmuawidycj"]
+
+[ext_resource type="Script" path="res://HUD/DebugHud.gd" id="1_abpxa"]
+
+[node name="DebugHud" type="Node2D"]
+script = ExtResource("1_abpxa")

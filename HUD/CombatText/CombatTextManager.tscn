@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://mb0ey446gqib"]
+
+[ext_resource type="Script" path="res://HUD/CombatText/CombatTextManager.gd" id="1_bosvj"]
+
+[node name="CombatTextManager" type="Node2D"]
+script = ExtResource("1_bosvj")

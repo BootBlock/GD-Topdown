@@ -1,0 +1,122 @@
+[gd_scene load_steps=14 format=3 uid="uid://bcpw780vlk7c7"]
+
+[ext_resource type="Script" path="res://Players/Player.gd" id="1_kd5br"]
+[ext_resource type="Script" path="res://Players/PlayerInfo.gd" id="2_6x38p"]
+[ext_resource type="Texture2D" uid="uid://bnrlxq18rosmy" path="res://Players/Player-001.png" id="2_diwi0"]
+[ext_resource type="PackedScene" uid="uid://c73uyup8rwif5" path="res://Items/Weapons/Projectiles/SniperRifle/SniperRifle.tscn" id="3_fkmoc"]
+[ext_resource type="PackedScene" uid="uid://dju1sdhdnn143" path="res://Players/Name.tscn" id="5_ccnyb"]
+
+[sub_resource type="Resource" id="Resource_bgv36"]
+script = ExtResource("2_6x38p")
+name = "BootBlock"
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_isora"]
+radius = 12.0
+height = 32.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_g57bk"]
+radius = 9.0
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_o22im"]
+polygon = PackedVector2Array(-1, -12, 15, 0, 7, 7, 0, 11, -9, 14, -13, 9, -13, -9, -9, -15)
+
+[sub_resource type="Gradient" id="Gradient_52eg0"]
+colors = PackedColorArray(1, 1, 1, 0.501961, 1, 1, 1, 0)
+
+[sub_resource type="Animation" id="Animation_kdiml"]
+resource_name = "aim_line_fade_in"
+length = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AimLine2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_j0a6q"]
+resource_name = "aim_line_fade_out"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AimLine2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_nemkg"]
+_data = {
+"aim_line_fade_in": SubResource("Animation_kdiml"),
+"aim_line_fade_out": SubResource("Animation_j0a6q")
+}
+
+[node name="Player" type="CharacterBody2D"]
+z_index = 50
+collision_mask = 15
+motion_mode = 1
+safe_margin = 0.2
+script = ExtResource("1_kd5br")
+info = SubResource("Resource_bgv36")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = 1.5708
+texture = ExtResource("2_diwi0")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-2, 0)
+shape = SubResource("CapsuleShape2D_isora")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_g57bk")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder = SubResource("OccluderPolygon2D_o22im")
+
+[node name="AimLine2D" type="Line2D" parent="."]
+visible = false
+z_index = 100
+position = Vector2(34, 0)
+points = PackedVector2Array(0, 0, 50, 0)
+width = 2.0
+default_color = Color(1, 1, 1, 0.501961)
+gradient = SubResource("Gradient_52eg0")
+begin_cap_mode = 2
+end_cap_mode = 2
+antialiased = true
+
+[node name="AimLineTimerFadeout" type="Timer" parent="."]
+wait_time = 1.5
+one_shot = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_nemkg")
+}
+
+[node name="ThrowNode" type="Node2D" parent="."]
+editor_description = "The location at which thrown objects are emitted; this ensures that the object doesn't hit ourself."
+position = Vector2(25, 0)
+
+[node name="WeaponAttachment" type="Node2D" parent="."]
+position = Vector2(14, 0)
+
+[node name="SniperRifle" parent="WeaponAttachment" instance=ExtResource("3_fkmoc")]
+
+[node name="Name" parent="." instance=ExtResource("5_ccnyb")]
+position = Vector2(-38, -47)
+
+[connection signal="timeout" from="AimLineTimerFadeout" to="." method="_on_aim_line_timer_fadeout_timeout"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

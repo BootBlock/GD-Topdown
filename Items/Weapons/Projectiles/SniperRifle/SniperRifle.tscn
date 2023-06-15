@@ -1,0 +1,25 @@
+[gd_scene load_steps=7 format=3 uid="uid://c73uyup8rwif5"]
+
+[ext_resource type="PackedScene" uid="uid://bcy18vd23cgvt" path="res://Items/Weapons/Gun.tscn" id="1_m24yb"]
+[ext_resource type="Script" path="res://Items/Weapons/Projectiles/SniperRifle/SniperRifle.gd" id="2_0es80"]
+[ext_resource type="Texture2D" uid="uid://bn11lxg21c21c" path="res://Items/Weapons/Projectiles/SniperRifle/SniperRifle.png" id="2_xum85"]
+[ext_resource type="AudioStream" uid="uid://futtx3coj5y0" path="res://Sounds/Weapons/Rifle/RifleShot.ogg" id="3_oj5oy"]
+[ext_resource type="AudioStream" uid="uid://rxisdxxtj8hg" path="res://Sounds/Weapons/Rifle/RifleReload.ogg" id="4_yrnmv"]
+[ext_resource type="AudioStream" uid="uid://b7uagdmhifma" path="res://Sounds/Weapons/Rifle/RifleEmpty.ogg" id="5_06xbs"]
+
+[node name="SniperRifle" instance=ExtResource("1_m24yb")]
+script = ExtResource("2_0es80")
+maximum_number_of_clips = 2
+bullets_per_clip = 1
+primary_fire_sound = ExtResource("3_oj5oy")
+reload_sound = ExtResource("4_yrnmv")
+empty_sound = ExtResource("5_06xbs")
+
+[node name="Sprite2D" parent="." index="0"]
+position = Vector2(0, -16)
+texture = ExtResource("2_xum85")
+centered = false
+
+[node name="RayCast2D" parent="." index="2"]
+position = Vector2(46, 0)
+target_position = Vector2(6000, 0)

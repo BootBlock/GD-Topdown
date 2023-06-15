@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://qxldxbs4lsxk"]
+
+[ext_resource type="Script" path="res://Items/Environment/EnvironmentItem.gd" id="1_516ee"]
+
+[node name="EnvironmentItem" type="RigidBody2D"]
+collision_layer = 8
+collision_mask = 15
+script = ExtResource("1_516ee")
+is_explosive = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+[connection signal="got_hit" from="." to="." method="_on_got_hit"]

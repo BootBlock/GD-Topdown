@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://dju1sdhdnn143"]
+
+[ext_resource type="Script" path="res://Players/Name.gd" id="1_ynfmx"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_3gilw"]
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+
+[node name="Name" type="Node2D"]
+script = ExtResource("1_ynfmx")
+
+[node name="Label" type="Label" parent="."]
+offset_left = 18.0
+offset_right = 94.0
+offset_bottom = 26.0
+text = "Unnamed"
+label_settings = SubResource("LabelSettings_3gilw")

@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://cgnmnbh5kq1b0"]
+
+[ext_resource type="Script" path="res://Items/Pickups/Pickup.gd" id="1_3k4pd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xjrct"]
+size = Vector2(31, 23)
+
+[node name="Pickup" type="Node2D"]
+script = ExtResource("1_3k4pd")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="PickupArea2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PickupArea2D"]
+position = Vector2(0.5, 1.5)
+shape = SubResource("RectangleShape2D_xjrct")
+
+[connection signal="area_entered" from="PickupArea2D" to="." method="_on_pickup_area_2d_area_entered"]

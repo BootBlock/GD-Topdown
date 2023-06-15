@@ -1,0 +1,43 @@
+[gd_scene load_steps=4 format=3 uid="uid://djs71q1phv5v8"]
+
+[ext_resource type="Script" path="res://HUD/PlayerHud.gd" id="1_p2flu"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_qpvf6"]
+outline_size = 5
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_7r3cy"]
+outline_size = 5
+outline_color = Color(0, 0, 0, 1)
+
+[node name="PlayerHud" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+mouse_filter = 2
+script = ExtResource("1_p2flu")
+
+[node name="TopLeftMarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+offset_left = 10.0
+offset_top = 7.0
+offset_right = 77.0
+offset_bottom = 63.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TopLeftMarginContainer"]
+layout_mode = 2
+
+[node name="BulletsLabel" type="Label" parent="TopLeftMarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Bullets: -"
+label_settings = SubResource("LabelSettings_qpvf6")
+
+[node name="ClipsLabel" type="Label" parent="TopLeftMarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Clips: -"
+label_settings = SubResource("LabelSettings_7r3cy")

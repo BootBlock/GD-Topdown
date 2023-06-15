@@ -1,0 +1,119 @@
+[gd_scene load_steps=13 format=3 uid="uid://d35pdg82bcapj"]
+
+[ext_resource type="Script" path="res://Stages/Stage001/Stage001.gd" id="1_acegh"]
+[ext_resource type="Texture2D" uid="uid://b33014owmsk5p" path="res://Stages/Stage001/Stage001.png" id="1_cgkk4"]
+[ext_resource type="Texture2D" uid="uid://doo3nmswa6wd" path="res://Graphics/Particles/spotlight_1.png" id="3_wus2p"]
+[ext_resource type="PackedScene" uid="uid://gw0hxp12h2yx" path="res://Items/Weapons/Explosives/Landmine/Landmine.tscn" id="4_8pcix"]
+[ext_resource type="PackedScene" uid="uid://fldsfa0iqdh5" path="res://Items/Environment/ExplosiveBarrel/ExplosiveBarrel.tscn" id="5_7l17j"]
+[ext_resource type="PackedScene" uid="uid://7ouemt2epwe" path="res://Items/Gameplay/PlayerSpawner.tscn" id="6_20n0o"]
+[ext_resource type="PackedScene" uid="uid://djs71q1phv5v8" path="res://HUD/PlayerHud.tscn" id="7_a6ciq"]
+[ext_resource type="PackedScene" uid="uid://cxil4t1bfqf0q" path="res://Items/Weapons/Projectiles/Pistol/PistolPickup.tscn" id="8_156f8"]
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_a7jbx"]
+polygon = PackedVector2Array(1443, 170, 1666, 318, 1619, 388, 1396, 240)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_td7it"]
+size = Vector2(268.216, 84.89)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_t3jhr"]
+polygon = PackedVector2Array(672, 718, 970, 718, 970, 890, 672, 890)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d0en6"]
+size = Vector2(299, 173.5)
+
+[node name="Stage" type="Node2D"]
+script = ExtResource("1_acegh")
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color(0.666667, 0.666667, 0.666667, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_cgkk4")
+centered = false
+
+[node name="Buildings" type="Node2D" parent="."]
+
+[node name="Building01" type="Node" parent="Buildings"]
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="Buildings/Building01"]
+occluder = SubResource("OccluderPolygon2D_a7jbx")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Buildings/Building01"]
+position = Vector2(1440, 236)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Buildings/Building01/StaticBody2D"]
+position = Vector2(91.4108, 42.9509)
+rotation = 0.586431
+shape = SubResource("RectangleShape2D_td7it")
+
+[node name="Building02" type="Node" parent="Buildings"]
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="Buildings/Building02"]
+occluder = SubResource("OccluderPolygon2D_t3jhr")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Buildings/Building02"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Buildings/Building02/StaticBody2D"]
+position = Vector2(821.5, 804.25)
+shape = SubResource("RectangleShape2D_d0en6")
+
+[node name="Lighting" type="Node" parent="."]
+
+[node name="StreetLamp01" type="PointLight2D" parent="Lighting"]
+position = Vector2(657, 699)
+shadow_enabled = true
+texture = ExtResource("3_wus2p")
+
+[node name="Items" type="Node2D" parent="."]
+
+[node name="PlayerSpawners" type="Node2D" parent="."]
+
+[node name="PlayerSpawner1" parent="PlayerSpawners" instance=ExtResource("6_20n0o")]
+position = Vector2(96, 95)
+rotation = 0.785398
+
+[node name="PlayerSpawner2" parent="PlayerSpawners" instance=ExtResource("6_20n0o")]
+position = Vector2(1592, 202)
+
+[node name="PlayerSpawner3" parent="PlayerSpawners" instance=ExtResource("6_20n0o")]
+position = Vector2(1038, 1006)
+
+[node name="Landmines" type="Node" parent="."]
+
+[node name="Landmine" parent="Landmines" instance=ExtResource("4_8pcix")]
+position = Vector2(298, 251)
+
+[node name="Landmine2" parent="Landmines" instance=ExtResource("4_8pcix")]
+position = Vector2(153, 662)
+
+[node name="Landmine3" parent="Landmines" instance=ExtResource("4_8pcix")]
+position = Vector2(1159, 240)
+
+[node name="Landmine4" parent="Landmines" instance=ExtResource("4_8pcix")]
+position = Vector2(1775, 926)
+
+[node name="Landmine5" parent="Landmines" instance=ExtResource("4_8pcix")]
+position = Vector2(1243, 1003)
+
+[node name="ExplosiveBarrel" parent="Landmines" instance=ExtResource("5_7l17j")]
+position = Vector2(68, 457)
+
+[node name="ExplosiveBarrel2" parent="Landmines" instance=ExtResource("5_7l17j")]
+position = Vector2(664, 918)
+
+[node name="ExplosiveBarrel3" parent="Landmines" instance=ExtResource("5_7l17j")]
+position = Vector2(336, 273)
+
+[node name="Landmine6" parent="Landmines" instance=ExtResource("4_8pcix")]
+position = Vector2(151, 336)
+
+[node name="Landmine7" parent="Landmines" instance=ExtResource("4_8pcix")]
+position = Vector2(474, 227)
+
+[node name="Landmine8" parent="Landmines" instance=ExtResource("4_8pcix")]
+position = Vector2(432, 357)
+
+[node name="PlayerHud" parent="." instance=ExtResource("7_a6ciq")]
+
+[node name="PistolPickup" parent="." instance=ExtResource("8_156f8")]
+position = Vector2(247, 77)
