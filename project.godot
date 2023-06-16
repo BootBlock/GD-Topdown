@@ -117,6 +117,8 @@ reload={
 2d_physics/layer_2="Triggers"
 2d_physics/layer_3="Projectiles"
 2d_physics/layer_4="Environment"
+2d_physics/layer_5="Sights"
+2d_physics/layer_6="Pickups"
 
 [physics]
 

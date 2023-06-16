@@ -90,17 +90,19 @@ func give(pickup: Pickup) -> bool:
 	var pickup_item = pickup.item.instantiate()
 
 	if pickup_item is Gun:
-		print("PLAYER GOT GUN " + pickup_item.name)
+		print("PLAYER GOT GUN: " + pickup_item.name)
 
+		# Remove any existing weapons from the player.
 		Utility.free_children(self.weapon_attachment)
 
+		# Add the new weapon and set an appropriate stance for that weapon.
 		self.weapon_attachment.add_child(pickup_item)
 		self._set_stance(pickup_item.stance)
 
 	elif pickup_item is Item:
-		print("PLAYER GOT ITEM " + pickup_item.name)
+		print("PLAYER GOT ITEM: " + pickup_item.name)
 	else:
-		print("PLAYER GOT AN UNKNOWN ITEM " + pickup_item.name)
+		print("PLAYER GOT UNKNOWN ITEM: " + pickup_item.name)
 
 	return true
 

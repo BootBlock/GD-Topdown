@@ -68,6 +68,7 @@ var raycast: RayCast2D
 var gunsight_dot_node: Node2D
 var gunsight_dot_light: PointLight2D
 var primary_attack_timer: Timer
+var reload_timer: Timer
 var audio_player: AudioStreamPlayer2D
 
 # Called when the node enters the scene tree for the first time.
@@ -81,6 +82,7 @@ func _ready() -> void:
 		self.gunsight_dot_light = self.gunsight_dot_node.get_node("PointLight2D")
 
 	self.primary_attack_timer = $PrimaryFireTimer
+	self.reload_timer = $ReloadTimer
 	self.audio_player = $AudioStreamPlayer2D
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -174,33 +176,15 @@ func reload() -> bool:
 	self.is_reloading = true
 	self.gun_reloading.emit(self.remaining_clips)
 
-	# TODO: If there's no reload sound, then that means is_reloading will
-	# forever be true as there's no stream _finished event to revert it.
 	if self.reload_sound:
 		self.audio_player.stream = self.reload_sound
 		self.audio_player.play()
 
-	# The clip will be reloaded once the sound effect has finished playing.
+	self.reload_timer = self.get_node("ReloadTimer")
+	self.reload_timer.start()
+
+	# The clip will be reloaded once the timer has timed out.
 	return true
-
-# This timer allows auto-reloading to be supported.
-func _on_audio_stream_player_2d_finished() -> void:
-	print("PLAYED: " + self.audio_player.stream.resource_name)
-	if self.audio_player.stream.resource_name == self.primary_fire_sound.resource_name:				# Sound of primary fire
-		return
-
-	if self.audio_player.stream.resource_name == self.reload_sound.resource_name:					# Sound of reload
-		#if self.is_reloading:		<-- Not needed if we know the reload sound just ended?
-
-		if self.maximum_number_of_clips > 0:
-			self.gun_reloaded.emit(self.remaining_clips)
-			self.remaining_clips -= 1
-
-		self.is_reloading = false
-		self.bullets_remaining_in_clip = self.bullets_per_clip
-
-		print("Reloaded. Current ammo count was " + str(self.bullets_remaining_in_clip) + " and is now " + str(self.bullets_per_clip))
-		return
 
 func _on_primary_fire_timer_timeout() -> void:
 	if self.clip_auto_reloads and self.bullets_remaining_in_clip == 0:
@@ -208,3 +192,14 @@ func _on_primary_fire_timer_timeout() -> void:
 
 func _on_secondary_fire_timer_timeout() -> void:
 	pass # Replace with function body.
+
+func _on_reload_timer_timeout() -> void:
+	if self.maximum_number_of_clips > 0:
+		self.gun_reloaded.emit(self.remaining_clips)
+		self.remaining_clips -= 1
+
+	self.is_reloading = false
+	self.bullets_remaining_in_clip = self.bullets_per_clip
+
+	print("Reloaded. Current ammo count was " + str(self.bullets_remaining_in_clip) + " and is now " + str(self.bullets_per_clip))
+	return
