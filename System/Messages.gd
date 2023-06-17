@@ -42,7 +42,7 @@ func input_is_action_pressed(action: StringName) -> bool:
 
 	return false
 
-func event_is_action_pressed(event: InputEvent, action: StringName) -> bool:
+func event_is_action_pressed(_event: InputEvent, action: StringName) -> bool:
 	if focused:
 		return Input.is_action_pressed(action)
 

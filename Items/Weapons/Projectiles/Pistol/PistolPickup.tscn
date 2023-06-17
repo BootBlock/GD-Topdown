@@ -6,7 +6,7 @@
 [ext_resource type="AudioStream" uid="uid://dnprddacqgocb" path="res://Sounds/Weapons/Pistol/PistolReload.ogg" id="2_vlxm0"]
 
 [node name="PistolPickup" instance=ExtResource("1_et6cp")]
-item = ExtResource("2_qa60i")
+item_packedscene = ExtResource("2_qa60i")
 pickup_sound = ExtResource("2_vlxm0")
 
 [node name="Sprite2D" parent="." index="0"]

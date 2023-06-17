@@ -6,7 +6,7 @@ const ANIMATION_ANIM_LINE_FADE_OUT: String = "aim_line_fade_out"
 enum stances { none, pistol, rifle }
 
 @export var info: PlayerInfo
-@export var speed = 80
+@export var speed := 80
 
 @onready var stance_idle: Texture2D = preload("res://Players/Player-01-Idle.png")
 @onready var stance_pistol: Texture2D = preload("res://Players/Player-01-PistolStance.png")
@@ -22,23 +22,29 @@ enum stances { none, pistol, rifle }
 @onready var aim_line_timer: Timer = $AimLineTimerFadeout
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 
-var aim_line_is_fading: bool = false
+var items: Array[Item] = []
+var active_item: Item
+
+var aim_line_is_fading := false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-
 	pass # Replace with function body.
 
 func _physics_process(delta: float) -> void:
 	self._process_input(delta)
 	self.move_and_slide()
 
-func _process_input(delta: float) -> void:
+func _process_input(_delta: float) -> void:
 	# Item selection
 	if Input.is_action_just_pressed("switch_item_next"):
 		pass
 	elif Input.is_action_just_pressed("switch_item_prev"):
 		pass
+	elif Input.is_action_just_pressed("throw"):
+		self.throw_item()
+#	elif Input.is_action_just_pressed("drop_item"):
+#		self.drop_item()
 
 	var move_dir = Vector2(Input.get_axis("move_left", "move_right"), Input.get_axis("move_up", "move_down"))
 	var aim_dir = Vector2(Input.get_axis("aim_left", "aim_right"), Input.get_axis("aim_up", "aim_down"))
@@ -82,12 +88,12 @@ func _on_animation_player_animation_finished(anim_name: String) -> void:
 
 ## Gives an item to the player.
 func give(pickup: Pickup) -> bool:
-	if pickup.item == null:
-		print("Player got a pick-up but it didn't have an Item property set.")
+	if pickup.item == null and pickup.item_packedscene == null:
+		print("Player got a pick-up but it didn't have an item/item_packedscene property set.")
 		return false
 
-	# Pickup.item is a PackedScene, so instantiate it before using.
-	var pickup_item = pickup.item.instantiate()
+	var pickup_item = pickup.item if pickup.item != null else pickup.item_packedscene.instantiate()
+	#pickup_item.player = self
 
 	if pickup_item is Gun:
 		print("PLAYER GOT GUN: " + pickup_item.name)
@@ -104,10 +110,32 @@ func give(pickup: Pickup) -> bool:
 	else:
 		print("PLAYER GOT UNKNOWN ITEM: " + pickup_item.name)
 
+	# Add the item to the player's "inventory".
+	self.items.append(pickup_item)
+
+	pickup_item.player = self
+	self.active_item = pickup_item
+
 	return true
 
-func _set_stance(stance: stances) -> void:
+## Removes the item the Player currently has active. Typically used when throwing an item.
+func remove_active_item() -> void:
+	self.items.erase(self.active_item)
+	self.active_item = null
 
+	Utility.free_children(self.weapon_attachment)
+	self._set_stance(Player.stances.none)
+
+## Not really implemented, and may be removed in favour of throw_item().
+func drop_item() -> void:
+	if self.active_item:
+		self.active_item.drop()
+
+func throw_item() -> void:
+	if self.active_item:
+		self.active_item.throw()
+
+func _set_stance(stance: stances) -> void:
 	# TODO: Player.tscn really should have a proper weapon attachment point system
 	#		rather than just offsetting the weapon position and changing the player sprite.
 

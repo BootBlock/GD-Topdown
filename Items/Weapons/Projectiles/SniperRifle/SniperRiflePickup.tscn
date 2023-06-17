@@ -6,11 +6,8 @@
 [ext_resource type="AudioStream" uid="uid://rxisdxxtj8hg" path="res://Sounds/Weapons/Rifle/RifleReload.ogg" id="3_apkfv"]
 
 [node name="SniperRiflePickup" instance=ExtResource("1_xh838")]
-item = ExtResource("2_gojo8")
+item_packedscene = ExtResource("2_gojo8")
 pickup_sound = ExtResource("3_apkfv")
 
 [node name="Sprite2D" parent="." index="0"]
 texture = ExtResource("2_vaw0r")
-
-[node name="CollisionShape2D" parent="PickupArea2D" index="0"]
-position = Vector2(0.5, -0.5)
