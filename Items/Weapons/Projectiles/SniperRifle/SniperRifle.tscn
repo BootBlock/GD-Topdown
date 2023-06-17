@@ -10,21 +10,28 @@
 [node name="SniperRifle" instance=ExtResource("1_m24yb")]
 position = Vector2(-29, 5)
 script = ExtResource("2_0es80")
-maximum_number_of_clips = 2
+maximum_number_of_clips = 3
 bullets_per_clip = 1
+damage = 50
+recoil_duration = 0.2
+recoil_frequency = 15
+recoil_amplitude = 15
 primary_fire_sound = ExtResource("3_oj5oy")
 reload_sound = ExtResource("4_yrnmv")
 empty_sound = ExtResource("5_06xbs")
 stance = 2
 
 [node name="Sprite2D" parent="." index="0"]
-position = Vector2(0, -16)
+position = Vector2(12, -7)
 texture = ExtResource("2_xum85")
 centered = false
 
 [node name="RayCast2D" parent="." index="2"]
-position = Vector2(46, 0)
+position = Vector2(57, 0)
 target_position = Vector2(6000, 0)
 
-[node name="AudioStreamPlayer2D" parent="." index="6"]
+[node name="ReloadTimer" parent="." index="6"]
+wait_time = 1.37
+
+[node name="AudioStreamPlayer2D" parent="." index="7"]
 max_polyphony = 3

@@ -14,7 +14,7 @@ gun_sight = 1
 [node name="RayCast2D" type="RayCast2D" parent="."]
 position = Vector2(14, 1)
 target_position = Vector2(350, 0)
-collision_mask = 13
+collision_mask = 29
 collide_with_areas = true
 
 [node name="GunSightDot" parent="." instance=ExtResource("2_8owft")]
@@ -26,8 +26,12 @@ one_shot = true
 [node name="SecondaryFireTimer" type="Timer" parent="."]
 one_shot = true
 
+[node name="ReloadTimer" type="Timer" parent="."]
+editor_description = "How long a reload takes before the gun can be fired again."
+one_shot = true
+
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 
 [connection signal="timeout" from="PrimaryFireTimer" to="." method="_on_primary_fire_timer_timeout"]
 [connection signal="timeout" from="SecondaryFireTimer" to="." method="_on_secondary_fire_timer_timeout"]
-[connection signal="finished" from="AudioStreamPlayer2D" to="." method="_on_audio_stream_player_2d_finished"]
+[connection signal="timeout" from="ReloadTimer" to="." method="_on_reload_timer_timeout"]

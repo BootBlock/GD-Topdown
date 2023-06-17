@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://cgnmnbh5kq1b0" path="res://Items/Pickups/Pickup.tscn" id="1_et6cp"]
 [ext_resource type="Texture2D" uid="uid://ygjkymgc2u42" path="res://Items/Weapons/Projectiles/Pistol/Pistol-Icon.png" id="2_lah6q"]
-[ext_resource type="PackedScene" uid="uid://cvph4nfy1huhp" path="res://Items/Weapons/Projectiles/Pistol/Pistol.tscn" id="2_qa60i"]
+[ext_resource type="PackedScene" uid="uid://btijm4jaow6ya" path="res://Items/Weapons/Projectiles/Pistol/Pistol.tscn" id="2_qa60i"]
 [ext_resource type="AudioStream" uid="uid://dnprddacqgocb" path="res://Sounds/Weapons/Pistol/PistolReload.ogg" id="2_vlxm0"]
 
 [node name="PistolPickup" instance=ExtResource("1_et6cp")]
