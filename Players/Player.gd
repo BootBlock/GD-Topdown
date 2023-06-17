@@ -6,7 +6,7 @@ const ANIMATION_ANIM_LINE_FADE_OUT: String = "aim_line_fade_out"
 enum stances { none, pistol, rifle }
 
 @export var info: PlayerInfo
-@export var speed = 125
+@export var speed = 80
 
 @onready var stance_idle: Texture2D = preload("res://Players/Player-01-Idle.png")
 @onready var stance_pistol: Texture2D = preload("res://Players/Player-01-PistolStance.png")

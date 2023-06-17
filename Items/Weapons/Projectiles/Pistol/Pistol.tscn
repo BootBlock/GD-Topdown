@@ -7,10 +7,10 @@
 [ext_resource type="AudioStream" uid="uid://dnprddacqgocb" path="res://Sounds/Weapons/Pistol/PistolReload.ogg" id="4_t1r13"]
 [ext_resource type="AudioStream" uid="uid://ddjnuxwmy8t2b" path="res://Sounds/Weapons/Pistol/PistolEmptyClick.ogg" id="5_rgemk"]
 
-[node name="Gun" instance=ExtResource("1_vwrly")]
+[node name="Pistol" instance=ExtResource("1_vwrly")]
 script = ExtResource("1_75xia")
 clip_auto_reloads = true
-damage = 10
+damage = 5
 gun_sight = 0
 primary_fire_sound = ExtResource("3_q8kpf")
 reload_sound = ExtResource("4_t1r13")

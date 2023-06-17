@@ -10,7 +10,7 @@
 [node name="SniperRifle" instance=ExtResource("1_m24yb")]
 position = Vector2(-29, 5)
 script = ExtResource("2_0es80")
-maximum_number_of_clips = 4
+maximum_number_of_clips = 3
 bullets_per_clip = 1
 damage = 50
 recoil_duration = 0.2
