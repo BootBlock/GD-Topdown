@@ -93,11 +93,8 @@ func give(pickup: Pickup) -> bool:
 		return false
 
 	var pickup_item = pickup.item if pickup.item != null else pickup.item_packedscene.instantiate()
-	#pickup_item.player = self
 
 	if pickup_item is Gun:
-		print("PLAYER GOT GUN: " + pickup_item.name)
-
 		# Remove any existing weapons from the player.
 		Utility.free_children(self.weapon_attachment)
 
@@ -135,6 +132,7 @@ func throw_item() -> void:
 	if self.active_item:
 		self.active_item.throw()
 
+## Change the Player's stance to better match the type of weapon they're holding.
 func _set_stance(stance: stances) -> void:
 	# TODO: Player.tscn really should have a proper weapon attachment point system
 	#		rather than just offsetting the weapon position and changing the player sprite.

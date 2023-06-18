@@ -1,3 +1,4 @@
+# Item.gd
 class_name Item extends Node2D
 
 ## The item has been thrown by the specified Player.
@@ -13,6 +14,8 @@ signal item_thrown(player: Player)
 @export var stance: Player.stances
 
 @onready var pickup_scene = preload("res://Items/Pickups/Pickup.tscn")
+
+#@onready var gunn = preload("res://Items/Weapons/Projectiles/SniperRifle/SniperRifle.tscn")
 
 ## Gets the Player that owns this instance.
 var player: Player
@@ -31,36 +34,43 @@ func drop() -> void:
 
 ## Throws the item.
 func throw() -> void:
-	print("Item.throw()")
+	self.debug("throw(); creating pickup from item and throwing it.")
+
 	var pickup = self._create_pickup_for_item()
 
-	# Add the player to the ignore list so they don't pick the pickup up (!) as it's being dropped.
+	# TODO: Pickup.gd should take care of this item repackaging functionality.
+
+	# Add the player to be ignored so they don't pick the pickup up (!) as it's being dropped.
 	pickup.ignore_player = self.player
 
 	# Add the new pickup to the current stage.
 	GameState.main_scene.current_stage.add_child(pickup)
 
-	# Pickup node needs to have been added to the scene for the sprite property to be available so we can update it.
+	# Pickup node needs to have been added to the scene (above line) for the sprite property to be available so we can update it.
 	pickup.sprite.texture = self.world_image
 
 	# Throw the item in the player's direction and add a bit of random rotation to it.
-	pickup.apply_central_impulse(Vector2.RIGHT.rotated(self.player.rotation).normalized() * 1000)
+	pickup.apply_central_impulse(Vector2.RIGHT.rotated(self.player.rotation).normalized() * 500)
 	pickup.angular_velocity = randi_range(1, 12)
 
 	self.player.remove_active_item()
 
-	# Notify any subscribers that the item has just been thrown.
+	# Notify all subscribers that the item has just been thrown.
 	self.item_thrown.emit(self.player)
 
-	# Wait for 300ms before allowing the player to pick the item back up (prevents insta-pickup upon a throw).
+	# Wait for 300ms before allowing the player to pick the item back up (prevents insta-pickup while throwing).
 	get_tree().create_timer(0.3).timeout.connect(func(): pickup.ignore_player = null)
 
+# TODO: This should be moved into Pickup.gd.
 ## Repackage an existing item into a Pickup that can be dropped on the battlefield and picked up another time.
 func _create_pickup_for_item() -> Pickup:
 	var pickup = self.pickup_scene.instantiate() as Pickup
 
-	pickup.item = self
+	# Doesn't quite work as the values aren't the same (issue is either here or on pick-up?).
+
+	pickup.item = Utility.clone(self) as Item
 	pickup.position = self.player.position
+	pickup.linear_velocity = self.player.velocity * 10		# Make the throw more powerful based on the Player's speed.
 
 	return pickup
 
@@ -68,7 +78,3 @@ func _create_pickup_for_item() -> Pickup:
 func debug(data) -> void:
 	if self.debug_output:
 		print(str(data))
-
-
-func _on_cleared_ignored_player_timer_timeout() -> void:
-	print("CLEARED!")

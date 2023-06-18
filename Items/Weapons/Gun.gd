@@ -216,4 +216,5 @@ func _on_reload_timer_timeout() -> void:
 
 	self.debug("Reloaded.")
 	self._update_ammo_display()
+
 	return
