@@ -11,3 +11,5 @@ func _process_input(_delta: float) -> void:
 		self.fire_primary()
 	elif Input.is_action_just_pressed("reload"):
 		self.reload()
+	elif Input.is_action_just_pressed("throw"):
+		self.throw()

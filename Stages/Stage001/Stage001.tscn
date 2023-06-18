@@ -118,6 +118,18 @@ position = Vector2(432, 357)
 
 [node name="PistolPickup" parent="." instance=ExtResource("8_156f8")]
 position = Vector2(247, 77)
+collision_layer = 1
+collision_mask = 1
+mass = 1.0
+physics_material_override = null
+linear_damp = 0.0
+angular_damp = 0.0
 
 [node name="SniperRiflePickup" parent="." instance=ExtResource("9_qb0yk")]
 position = Vector2(73, 197)
+collision_layer = 1
+collision_mask = 1
+mass = 1.0
+physics_material_override = null
+linear_damp = 0.0
+angular_damp = 0.0

@@ -53,9 +53,6 @@ signal gun_reloaded(remaining_clips: int)
 ## The sound effect to play when the gun is empty; that is, no remaining clips or bullets.
 @export var empty_sound: AudioStream
 
-## The player that is holding the gun.
-var player: Player
-
 ## The total number of remaining clips.
 var remaining_clips: int = 1
 
@@ -98,9 +95,9 @@ func _process(_delta: float) -> void:
 
 			var collider = self.raycast.get_collider()#.owner
 			if collider:
-				var origin = self.raycast.global_transform.origin
+				#var origin = self.raycast.global_transform.origin
 				var collision_point = self.raycast.get_collision_point()
-				var distance = origin.distance_to(collision_point)
+				#var distance = origin.distance_to(collision_point)
 
 				# Inverse square law: make the shot less precise the further away the (potential) hit target
 #				var energy = 1.0 / (1.0 + 25.0 * distance * distance)
@@ -219,4 +216,5 @@ func _on_reload_timer_timeout() -> void:
 
 	self.debug("Reloaded.")
 	self._update_ammo_display()
+
 	return

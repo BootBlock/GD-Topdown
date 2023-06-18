@@ -7,7 +7,7 @@ class_name ExplosiveBarrel extends EnvironmentItem
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 # The barrel has been hit.
-func _on_got_hit(damage) -> void:
+func _on_got_hit(_damage) -> void:
 	self.animation_player.play("hit")
 
 # The barrel has received the signal to be destroyed.

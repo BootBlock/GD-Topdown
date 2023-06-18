@@ -25,9 +25,9 @@ var should_be_freed: bool = false
 func _ready() -> void:
 	self.active_indicator_timer.start()
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+## Called every frame. 'delta' is the elapsed time since the previous frame.
+#func _process(delta: float) -> void:
+#	pass
 
 # Something triggered the landmine!
 func _on_area_2d_area_entered(area: Area2D) -> void:
