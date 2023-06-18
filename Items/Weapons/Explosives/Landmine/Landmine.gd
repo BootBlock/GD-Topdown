@@ -35,10 +35,9 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 		return
 
 	$DetectionArea/CollisionShape.set_deferred("disabled", true)
-
 	$AnimationPlayer.play("triggered")
 
-	self.active_indicator_timer.stop()							# TODO: Remove this block once the anim has been implemented
+	self.active_indicator_timer.stop()																# TODO: Remove this block once the anim has been implemented
 #	self.active_indicator_light.color = Color.RED
 #	self.active_indicator_light.visible = true
 #	self.active_indicator_sprite.self_modulate = Color.RED
@@ -48,7 +47,7 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 	self.actived_indicator_timer.start()
 
 	for affected_area in self.within_blast_range:
-		print("LANDMINE BLAST AFFECTED: " + affected_area.owner.name)
+		#print("LANDMINE BLAST AFFECTED: " + affected_area.owner.name)
 		var impulse_strength = 100
 
 		if affected_area.owner is RigidBody2D:
@@ -69,7 +68,6 @@ func _on_active_indicator_timer_timeout() -> void:
 
 	self.active_indicator_light.visible = self.activation_is_lit
 	self.active_indicator_timer.start()
-
 
 func _on_activated_timer_timeout() -> void:
 	self.active_indicator_light.visible = false
@@ -93,7 +91,6 @@ func _on_audio_stream_player_finished() -> void:
 		$AudioStreamPlayer.stream = null
 		self.sfx_explosion = null
 
-
 func _on_blast_range_area_area_entered(area: Area2D) -> void:
 	if area == self.trigger_detection_area:															# Ignore objects that belong to the landmine itself.
 		return
@@ -106,8 +103,3 @@ func _on_blast_range_area_area_exited(area: Area2D) -> void:
 	if self.within_blast_range.has(area):
 		#print("Exited blast area: " + area.name)
 		self.within_blast_range.erase(area)
-
-
-
-
-

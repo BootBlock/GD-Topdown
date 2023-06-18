@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://d35pdg82bcapj"]
+[gd_scene load_steps=15 format=3 uid="uid://d35pdg82bcapj"]
 
 [ext_resource type="Script" path="res://Stages/Stage001/Stage001.gd" id="1_acegh"]
 [ext_resource type="Texture2D" uid="uid://b33014owmsk5p" path="res://Stages/Stage001/Stage001.png" id="1_cgkk4"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://djs71q1phv5v8" path="res://HUD/PlayerHud.tscn" id="7_a6ciq"]
 [ext_resource type="PackedScene" uid="uid://cxil4t1bfqf0q" path="res://Items/Weapons/Projectiles/Pistol/PistolPickup.tscn" id="8_156f8"]
 [ext_resource type="PackedScene" uid="uid://cwhejb4n7s7m5" path="res://Items/Weapons/Projectiles/SniperRifle/SniperRiflePickup.tscn" id="9_qb0yk"]
+[ext_resource type="Texture2D" uid="uid://daafnc5jpudwr" path="res://Items/Weapons/Explosives/Grenade/Grenade.png" id="10_seing"]
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_a7jbx"]
 polygon = PackedVector2Array(1443, 170, 1666, 318, 1619, 388, 1396, 240)
@@ -41,6 +42,8 @@ occluder = SubResource("OccluderPolygon2D_a7jbx")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Buildings/Building01"]
 position = Vector2(1440, 236)
+collision_layer = 8
+collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Buildings/Building01/StaticBody2D"]
 position = Vector2(91.4108, 42.9509)
@@ -53,6 +56,8 @@ shape = SubResource("RectangleShape2D_td7it")
 occluder = SubResource("OccluderPolygon2D_t3jhr")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Buildings/Building02"]
+collision_layer = 8
+collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Buildings/Building02/StaticBody2D"]
 position = Vector2(821.5, 804.25)
@@ -133,3 +138,7 @@ mass = 1.0
 physics_material_override = null
 linear_damp = 0.0
 angular_damp = 0.0
+
+[node name="Grenade" type="Sprite2D" parent="."]
+position = Vector2(159, 146)
+texture = ExtResource("10_seing")
