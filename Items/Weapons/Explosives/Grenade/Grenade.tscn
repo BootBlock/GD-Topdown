@@ -1,16 +1,5 @@
-[gd_scene load_steps=4 format=3 uid="uid://cqwybsk330ldl"]
+[gd_scene load_steps=2 format=3 uid="uid://tahn5oj8fhwe"]
 
-[ext_resource type="Script" path="res://Items/Weapons/Explosives/Grenade/Grenade.gd" id="1_mqw78"]
-[ext_resource type="Texture2D" uid="uid://daafnc5jpudwr" path="res://Items/Weapons/Explosives/Grenade/Grenade.png" id="2_i56l0"]
+[ext_resource type="PackedScene" uid="uid://daj18g5xqy1vb" path="res://Items/Weapons/Thrown.tscn" id="1_82pmh"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_qf30t"]
-radius = 5.0
-
-[node name="Grenade" type="RigidBody2D"]
-script = ExtResource("1_mqw78")
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_i56l0")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_qf30t")
+[node name="Thrown" instance=ExtResource("1_82pmh")]

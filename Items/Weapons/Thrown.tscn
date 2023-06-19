@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://daj18g5xqy1vb"]
+
+[ext_resource type="Script" path="res://Items/Weapons/Thrown.gd" id="1_8ba0q"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_30ahk"]
+
+[node name="Thrown" type="RigidBody2D"]
+script = ExtResource("1_8ba0q")
+
+[node name="RigidBodyCollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_30ahk")

@@ -1,5 +1,5 @@
-# Item.gd
-class_name Item extends Node2D
+# Thrown.gd
+extends RigidBody2D
 
 ## The item has been thrown by the specified Player.
 signal item_thrown(player: Player)
@@ -18,17 +18,13 @@ signal item_thrown(player: Player)
 ## Gets the Player that owns this instance.
 var player: Player
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta: float) -> void:
-	pass
-
-## Drops the item to the ground.
-func drop() -> void:
-	print("Item.drop()")
+## Called when the node enters the scene tree for the first time.
+#func _ready() -> void:
+#	pass # Replace with function body.
+#
+## Called every frame. 'delta' is the elapsed time since the previous frame.
+#func _process(delta: float) -> void:
+#	pass
 
 ## Throws the item.
 func throw() -> void:
