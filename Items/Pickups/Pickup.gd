@@ -1,6 +1,9 @@
 # Pickup.gd
 class_name Pickup extends RigidBody2D
 
+## If true, debug information relating to the Item will be printed to the output if debug() is called.
+@export var debug_output := false
+
 # Can't get the Item class to work, so using a PackedScene for now.
 ## The backing Item that the pickup represents; when obtained, this is what the Player will be given.
 @export var item_packedscene: PackedScene
@@ -29,7 +32,7 @@ func _ready() -> void:
 
 # Someone ran over the pickup.
 func _on_pickup_area_2d_area_entered(area: Area2D) -> void:
-	print(area.owner.name + " ran over the pickup.")
+	self.debug(area.owner.name + " ran over the pickup.")
 
 	if not area.owner is Player:
 		return
@@ -56,3 +59,8 @@ func _on_pickup_area_2d_area_entered(area: Area2D) -> void:
 
 func _on_audio_stream_player_2d_finished() -> void:
 	self.queue_free()
+
+## Prints debugging information to the output if debug_output is set to true; otherwise, output is suppressed.
+func debug(data) -> void:
+	if self.debug_output:
+		print(str(data))

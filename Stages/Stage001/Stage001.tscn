@@ -90,7 +90,7 @@ occluder = SubResource("OccluderPolygon2D_hcx5x")
 [node name="Lighting" type="Node" parent="."]
 
 [node name="StreetLamp01" type="PointLight2D" parent="Lighting"]
-position = Vector2(963, 908)
+position = Vector2(959, 903)
 color = Color(1, 1, 0.509804, 1)
 shadow_enabled = true
 shadow_filter = 2
@@ -151,7 +151,6 @@ position = Vector2(432, 357)
 position = Vector2(247, 77)
 collision_layer = 1
 collision_mask = 1
-mass = 1.0
 physics_material_override = null
 linear_damp = 0.0
 angular_damp = 0.0
@@ -160,7 +159,6 @@ angular_damp = 0.0
 position = Vector2(73, 197)
 collision_layer = 1
 collision_mask = 1
-mass = 1.0
 physics_material_override = null
 linear_damp = 0.0
 angular_damp = 0.0
