@@ -9,7 +9,6 @@
 [ext_resource type="PackedScene" uid="uid://djs71q1phv5v8" path="res://HUD/PlayerHud.tscn" id="7_a6ciq"]
 [ext_resource type="PackedScene" uid="uid://cxil4t1bfqf0q" path="res://Items/Weapons/Projectiles/Pistol/PistolPickup.tscn" id="8_156f8"]
 [ext_resource type="PackedScene" uid="uid://cwhejb4n7s7m5" path="res://Items/Weapons/Projectiles/SniperRifle/SniperRiflePickup.tscn" id="9_qb0yk"]
-[ext_resource type="PackedScene" uid="uid://b002deqxu852r" path="res://Environment/Building01/Building01.tscn" id="10_xaaf0"]
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_a7jbx"]
 polygon = PackedVector2Array(1443, 170, 1666, 318, 1619, 388, 1396, 240)
@@ -22,6 +21,9 @@ polygon = PackedVector2Array(672, 718, 970, 718, 970, 890, 672, 890)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d0en6"]
 size = Vector2(299, 173.5)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_hcx5x"]
+polygon = PackedVector2Array(-50, 20, 12, -42, 15, -39, 17, -41, 25, -34, 23, -32, 36, -19, 38, -21, 46, -13, 43, -11, 46, -8, -16, 54, -20, 51, -22, 53, -29, 46, -27, 43, -40, 31, -42, 33, -49, 26, -47, 23)
 
 [node name="Stage" type="Node2D"]
 script = ExtResource("1_acegh")
@@ -63,12 +65,27 @@ collision_mask = 0
 position = Vector2(821.5, 804.25)
 shape = SubResource("RectangleShape2D_d0en6")
 
+[node name="Environment" type="Node2D" parent="."]
+
+[node name="Dumpster01" type="Node2D" parent="Environment"]
+position = Vector2(1029, 906)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Environment/Dumpster01"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Environment/Dumpster01/StaticBody2D"]
+rotation = -0.787143
+polygon = PackedVector2Array(-52.2888, -21.3046, -52.3727, 26.7786, 40.9652, 26.9415, 41.755, -20.4333)
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="Environment/Dumpster01"]
+occluder = SubResource("OccluderPolygon2D_hcx5x")
+
 [node name="Lighting" type="Node" parent="."]
 
 [node name="StreetLamp01" type="PointLight2D" parent="Lighting"]
-position = Vector2(954, 708)
+position = Vector2(963, 908)
 color = Color(1, 1, 0.509804, 1)
 shadow_enabled = true
+shadow_filter = 2
 texture = ExtResource("3_wus2p")
 
 [node name="Items" type="Node2D" parent="."]
@@ -139,6 +156,3 @@ mass = 1.0
 physics_material_override = null
 linear_damp = 0.0
 angular_damp = 0.0
-
-[node name="Building" parent="." instance=ExtResource("10_xaaf0")]
-position = Vector2(1149, 804)
