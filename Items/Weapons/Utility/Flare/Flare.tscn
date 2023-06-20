@@ -172,7 +172,7 @@ _data = {
 
 [node name="Flare" type="RigidBody2D"]
 collision_layer = 0
-collision_mask = 7
+collision_mask = 15
 mass = 0.25
 physics_material_override = SubResource("PhysicsMaterial_pk2bb")
 can_sleep = false

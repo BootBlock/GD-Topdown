@@ -1,14 +1,14 @@
 [gd_scene load_steps=8 format=3 uid="uid://c73uyup8rwif5"]
 
-[ext_resource type="PackedScene" uid="uid://bcy18vd23cgvt" path="res://Items/Weapons/Gun.tscn" id="1_m24yb"]
 [ext_resource type="Script" path="res://Items/Weapons/Projectiles/SniperRifle/SniperRifle.gd" id="2_0es80"]
 [ext_resource type="Texture2D" uid="uid://bn11lxg21c21c" path="res://Items/Weapons/Projectiles/SniperRifle/SniperRifle.png" id="2_xum85"]
 [ext_resource type="AudioStream" uid="uid://futtx3coj5y0" path="res://Sounds/Weapons/Rifle/RifleShot.ogg" id="3_oj5oy"]
 [ext_resource type="AudioStream" uid="uid://rxisdxxtj8hg" path="res://Sounds/Weapons/Rifle/RifleReload.ogg" id="4_yrnmv"]
 [ext_resource type="AudioStream" uid="uid://b7uagdmhifma" path="res://Sounds/Weapons/Rifle/RifleEmpty.ogg" id="5_06xbs"]
 [ext_resource type="Texture2D" uid="uid://c6mm35hf07u0l" path="res://Items/Weapons/Projectiles/SniperRifle/SniperRifle-Icon.png" id="6_48wkt"]
+[ext_resource type="PackedScene" uid="uid://duct7fde7hepc" path="res://Items/Weapons/GunSightDot.tscn" id="7_j1te0"]
 
-[node name="SniperRifle" instance=ExtResource("1_m24yb")]
+[node name="SniperRifle" type="Node2D"]
 position = Vector2(-29, 5)
 script = ExtResource("2_0es80")
 maximum_number_of_clips = 3
@@ -17,23 +17,39 @@ damage = 50
 recoil_duration = 0.2
 recoil_frequency = 15
 recoil_amplitude = 15
+gun_sight = 1
 primary_fire_sound = ExtResource("3_oj5oy")
 reload_sound = ExtResource("4_yrnmv")
 empty_sound = ExtResource("5_06xbs")
 world_image = ExtResource("6_48wkt")
 stance = 2
 
-[node name="Sprite2D" parent="." index="0"]
+[node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(12, -7)
 texture = ExtResource("2_xum85")
 centered = false
 
-[node name="RayCast2D" parent="." index="2"]
+[node name="MuzzleNode2D" type="Node2D" parent="."]
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
 position = Vector2(57, 0)
 target_position = Vector2(6000, 0)
+collision_mask = 29
+collide_with_areas = true
 
-[node name="ReloadTimer" parent="." index="6"]
+[node name="GunSightDot" parent="." instance=ExtResource("7_j1te0")]
+
+[node name="PrimaryFireTimer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[node name="SecondaryFireTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="ReloadTimer" type="Timer" parent="."]
+editor_description = "How long a reload takes before the gun can be fired again."
 wait_time = 1.37
+one_shot = true
 
-[node name="AudioStreamPlayer2D" parent="." index="7"]
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 max_polyphony = 3

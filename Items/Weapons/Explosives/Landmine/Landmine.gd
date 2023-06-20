@@ -1,19 +1,23 @@
 # Landmine.gd
 extends RigidBody2D
 
+## If true, debug information relating to the Item will be printed to the output if debug() is called.
+@export var debug_output := false
+
 ## Gets or sets whether the landmine is active and should trigger on contact.
 @export var is_active: bool = true
 
 @onready var active_indicator_sprite: Sprite2D            = $Sprite2D
 @onready var active_indicator_light : PointLight2D        = $ActiveIndicatorPointLight
 @onready var active_indicator_timer : Timer               = $ActiveIndicatorTimer
-@onready var actived_indicator_timer: Timer               = $ActivatedTimer
+@onready var activated_indicator_timer: Timer             = $ActivatedTimer
 
 @onready var trigger_detection_area:  Area2D              = $DetectionArea
 @onready var blasting_range_detection_area:  Area2D       = $BlastRangeArea
 
 @onready var sfx_explosion = preload("res://Sounds/DistantExplosion.ogg")
 
+## The items and players within the blast zone for when the landmine is triggered.
 var within_blast_range: Array = []
 
 var activation_is_lit: bool = false
@@ -25,35 +29,32 @@ var should_be_freed: bool = false
 func _ready() -> void:
 	self.active_indicator_timer.start()
 
-## Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta: float) -> void:
-#	pass
-
 # Something triggered the landmine!
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	if area == self.blasting_range_detection_area:													# Ignore objects that belong to the landmine itself.
 		return
 
+	self.debug("Landmine._on_area_2d_area_entered(): " + area.name)
+
 	$DetectionArea/CollisionShape.set_deferred("disabled", true)
 	$AnimationPlayer.play("triggered")
 
-	self.active_indicator_timer.stop()																# TODO: Remove this block once the anim has been implemented
-#	self.active_indicator_light.color = Color.RED
-#	self.active_indicator_light.visible = true
-#	self.active_indicator_sprite.self_modulate = Color.RED
-#	self.active_indicator_light.texture_scale = 2.2
-#	self.active_indicator_light.energy = 3
-#	self.active_indicator_light.visible = true
-	self.actived_indicator_timer.start()
+	self.active_indicator_timer.stop()
+	self.activated_indicator_timer.start()
 
-	for affected_area in self.within_blast_range:
-		#print("LANDMINE BLAST AFFECTED: " + affected_area.owner.name)
-		var impulse_strength = 100
+	await get_tree().create_timer(0.2).timeout
 
-		if affected_area.owner is RigidBody2D:
-			var body = affected_area.owner as RigidBody2D
-			var angle = body.rotation
-			body.apply_central_impulse(Vector2(cos(angle), sin(angle)) * impulse_strength)
+	for affected in self.within_blast_range:
+		self.debug("  -> Blast affected: " + affected.owner.name)
+		var impulse_strength_at_centre = 52										# Requires tweaking
+
+		if affected.owner is RigidBody2D:
+			var body = affected.owner as RigidBody2D
+			var direction = (body.position - self.position).normalized()
+			var force = impulse_strength_at_centre * direction / (body.position - self.position).length()
+			self.debug("     -> Direction: " + str(direction) + ", Force: " + str(force))
+
+			body.apply_central_impulse(force * 42)								# Requires tweaking
 
 	$AudioStreamPlayer.play()
 
@@ -92,14 +93,19 @@ func _on_audio_stream_player_finished() -> void:
 		self.sfx_explosion = null
 
 func _on_blast_range_area_area_entered(area: Area2D) -> void:
-	if area == self.trigger_detection_area:															# Ignore objects that belong to the landmine itself.
+	if area == self.trigger_detection_area or area.name == self.blasting_range_detection_area.name:		# Ignore objects that belong to the landmine itself.
 		return
 
 	if !self.within_blast_range.has(area):
-		#print("Entered blast area: " + area.name)
+		self.debug("Entered blast area: " + area.owner.name)
 		self.within_blast_range.append(area)
 
 func _on_blast_range_area_area_exited(area: Area2D) -> void:
 	if self.within_blast_range.has(area):
-		#print("Exited blast area: " + area.name)
+		self.debug("Exited blast area: " + area.owner.name)
 		self.within_blast_range.erase(area)
+
+## Prints debugging information to the output if debug_output is set to true; otherwise, output is suppressed.
+func debug(data) -> void:
+	if self.debug_output:
+		print(str(data))
