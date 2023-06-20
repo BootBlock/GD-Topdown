@@ -16,8 +16,8 @@ height = 32.0
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_g57bk"]
 radius = 9.0
 
-[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_o22im"]
-polygon = PackedVector2Array(-1, -12, 15, 0, 7, 7, 0, 11, -9, 14, -13, 9, -13, -9, -9, -15)
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_5dlr6"]
+polygon = PackedVector2Array(1.5, 0.6, 5.5, 1.6, 5.5, 2.5, 6.7, 0.5, 11.5, 0.5, 11.5, 1.7, 13.5, 2.7, 13.5, 4.5, 14.5, 4.5, 14.5, 6.5, 15.5, 6.5, 15.5, 10.5, 14.3, 10.5, 13.3, 12.5, 12.5, 12.5, 12.5, 13.5, 9.5, 13.5, 9.5, 14.5, 5.5, 14.5, 5.5, 15.5, -5.5, 15.5, -5.5, 14.5, -9.5, 14.5, -9.5, 13.5, -12.5, 13.5, -12.5, 12.3, -14.5, 11.3, -14.5, 10.5, -15.5, 10.5, -15.5, 6.5, -14.4, 6.5, -13.4, 2.5, -12.3, 2.5, -11.3, 0.5, -6.7, 0.5, -5.7, 2.5, -5.5, 1.6, -1.5, 0.6, -1.5, -0.5, 1.5, -0.5)
 
 [sub_resource type="Gradient" id="Gradient_52eg0"]
 colors = PackedColorArray(1, 1, 1, 0.501961, 1, 1, 1, 0)
@@ -82,7 +82,8 @@ shape = SubResource("CapsuleShape2D_isora")
 shape = SubResource("CapsuleShape2D_g57bk")
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]
-occluder = SubResource("OccluderPolygon2D_o22im")
+rotation = 1.5708
+occluder = SubResource("OccluderPolygon2D_5dlr6")
 
 [node name="AimLine2D" type="Line2D" parent="."]
 visible = false

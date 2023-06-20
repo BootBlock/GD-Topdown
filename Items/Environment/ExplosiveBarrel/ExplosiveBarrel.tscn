@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://fldsfa0iqdh5"]
+[gd_scene load_steps=13 format=3 uid="uid://fldsfa0iqdh5"]
 
 [ext_resource type="Script" path="res://Items/Environment/ExplosiveBarrel/ExplosiveBarrel.gd" id="2_2xjvk"]
 [ext_resource type="Texture2D" uid="uid://doomot1eyk2ny" path="res://Items/Environment/ExplosiveBarrel/ExplosiveBarrel.png" id="2_n72u3"]
@@ -91,6 +91,9 @@ _data = {
 "hit": SubResource("Animation_e5ev7")
 }
 
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_7qkfi"]
+polygon = PackedVector2Array(3.2, -9.2, 5.2, -9.2, 6.2, -8.2, 7.2, -7.2, 8.2, -6.2, 9.2, -5.2, 9.2, -3.2, 10.2, -3.2, 10.2, 3.2, 9.2, 3.2, 9.2, 5.2, 8.2, 6.2, 7.2, 7.2, 6.2, 8.2, 5.2, 9.2, 3.2, 9.2, 3.2, 10.2, -3.2, 10.2, -3.2, 9.2, -5.2, 9.2, -6.2, 8.2, -7.2, 7.2, -8.2, 6.2, -9.2, 5.2, -9.2, 3.2, -10.2, 3.2, -10.2, -3.2, -9.2, -3.2, -9.2, -5.2, -8.2, -6.2, -7.2, -7.2, -6.2, -8.2, -5.2, -9.2, -3.2, -9.2, -3.2, -10.2, 3.2, -10.2)
+
 [node name="ExplosiveBarrel" type="RigidBody2D"]
 collision_layer = 8
 collision_mask = 15
@@ -126,6 +129,9 @@ max_polyphony = 2
 libraries = {
 "": SubResource("AnimationLibrary_muaju")
 }
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder = SubResource("OccluderPolygon2D_7qkfi")
 
 [connection signal="destroying" from="." to="." method="_on_destroying"]
 [connection signal="got_hit" from="." to="." method="_on_got_hit"]
