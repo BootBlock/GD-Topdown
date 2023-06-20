@@ -1,6 +1,9 @@
 # Landmine.gd
 extends RigidBody2D
 
+## If true, debug information relating to the Item will be printed to the output if debug() is called.
+@export var debug_output := true
+
 ## Gets or sets whether the landmine is active and should trigger on contact.
 @export var is_active: bool = true
 
@@ -34,6 +37,8 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 	if area == self.blasting_range_detection_area:													# Ignore objects that belong to the landmine itself.
 		return
 
+	self.debug("Landmine._on_area_2d_area_entered(): " + area.name)
+
 	$DetectionArea/CollisionShape.set_deferred("disabled", true)
 	$AnimationPlayer.play("triggered")
 
@@ -47,7 +52,7 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 	self.actived_indicator_timer.start()
 
 	for affected_area in self.within_blast_range:
-		#print("LANDMINE BLAST AFFECTED: " + affected_area.owner.name)
+		self.debug("  -> Blast affected: " + affected_area.owner.name)
 		var impulse_strength = 100
 
 		if affected_area.owner is RigidBody2D:
@@ -92,14 +97,19 @@ func _on_audio_stream_player_finished() -> void:
 		self.sfx_explosion = null
 
 func _on_blast_range_area_area_entered(area: Area2D) -> void:
-	if area == self.trigger_detection_area:															# Ignore objects that belong to the landmine itself.
+	if area == self.trigger_detection_area or area.name == self.blasting_range_detection_area.name:		# Ignore objects that belong to the landmine itself.
 		return
 
 	if !self.within_blast_range.has(area):
-		#print("Entered blast area: " + area.name)
+		self.debug("Entered blast area: " + area.owner.name)
 		self.within_blast_range.append(area)
 
 func _on_blast_range_area_area_exited(area: Area2D) -> void:
 	if self.within_blast_range.has(area):
-		#print("Exited blast area: " + area.name)
+		self.debug("Exited blast area: " + area.owner.name)
 		self.within_blast_range.erase(area)
+
+## Prints debugging information to the output if debug_output is set to true; otherwise, output is suppressed.
+func debug(data) -> void:
+	if self.debug_output:
+		print(str(data))

@@ -1,7 +1,8 @@
-[gd_scene load_steps=15 format=3 uid="uid://d35pdg82bcapj"]
+[gd_scene load_steps=17 format=3 uid="uid://d35pdg82bcapj"]
 
 [ext_resource type="Script" path="res://Stages/Stage001/Stage001.gd" id="1_acegh"]
 [ext_resource type="Texture2D" uid="uid://b33014owmsk5p" path="res://Stages/Stage001/Stage001.png" id="1_cgkk4"]
+[ext_resource type="Script" path="res://Stages/StageConfig.gd" id="2_ero5e"]
 [ext_resource type="Texture2D" uid="uid://doo3nmswa6wd" path="res://Graphics/Particles/spotlight_1.png" id="3_wus2p"]
 [ext_resource type="PackedScene" uid="uid://gw0hxp12h2yx" path="res://Items/Weapons/Explosives/Landmine/Landmine.tscn" id="4_8pcix"]
 [ext_resource type="PackedScene" uid="uid://fldsfa0iqdh5" path="res://Items/Environment/ExplosiveBarrel/ExplosiveBarrel.tscn" id="5_7l17j"]
@@ -9,6 +10,10 @@
 [ext_resource type="PackedScene" uid="uid://djs71q1phv5v8" path="res://HUD/PlayerHud.tscn" id="7_a6ciq"]
 [ext_resource type="PackedScene" uid="uid://cxil4t1bfqf0q" path="res://Items/Weapons/Projectiles/Pistol/PistolPickup.tscn" id="8_156f8"]
 [ext_resource type="PackedScene" uid="uid://cwhejb4n7s7m5" path="res://Items/Weapons/Projectiles/SniperRifle/SniperRiflePickup.tscn" id="9_qb0yk"]
+
+[sub_resource type="Resource" id="Resource_v6t8w"]
+script = ExtResource("2_ero5e")
+background_color = Color(0.192157, 0.192157, 0.192157, 1)
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_a7jbx"]
 polygon = PackedVector2Array(1443, 170, 1666, 318, 1619, 388, 1396, 240)
@@ -27,6 +32,7 @@ polygon = PackedVector2Array(-50, 20, 12, -42, 15, -39, 17, -41, 25, -34, 23, -3
 
 [node name="Stage" type="Node2D"]
 script = ExtResource("1_acegh")
+stage_config = SubResource("Resource_v6t8w")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color(0.666667, 0.666667, 0.666667, 1)
@@ -71,6 +77,8 @@ shape = SubResource("RectangleShape2D_d0en6")
 position = Vector2(1029, 906)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Environment/Dumpster01"]
+collision_layer = 8
+collision_mask = 0
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Environment/Dumpster01/StaticBody2D"]
 rotation = -0.787143
