@@ -35,7 +35,7 @@ script = ExtResource("1_acegh")
 stage_config = SubResource("Resource_v6t8w")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
-color = Color(0.666667, 0.666667, 0.666667, 1)
+color = Color(0.592157, 0.592157, 0.592157, 1)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_cgkk4")
