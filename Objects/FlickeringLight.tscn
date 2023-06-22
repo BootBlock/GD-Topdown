@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://cioc03x5fmm0d"]
+
+[ext_resource type="Texture2D" uid="uid://doo3nmswa6wd" path="res://Graphics/Particles/spotlight_1.png" id="1_13vrr"]
+[ext_resource type="Script" path="res://Objects/FlickeringLight.gd" id="2_mqohj"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_mg55b"]
+noise_type = 0
+frequency = 0.0203
+fractal_octaves = 3
+fractal_lacunarity = 10.0
+fractal_gain = 1.1
+fractal_ping_pong_strength = 1.0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_nkpvm"]
+width = 256
+height = 256
+generate_mipmaps = false
+noise = SubResource("FastNoiseLite_mg55b")
+
+[node name="FlickeringLight" type="PointLight2D"]
+shadow_enabled = true
+texture = ExtResource("1_13vrr")
+script = ExtResource("2_mqohj")
+noise = SubResource("NoiseTexture2D_nkpvm")
