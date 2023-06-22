@@ -14,7 +14,6 @@ func _process(delta: float) -> void:
 	self.time_passed += delta
 
 	var sampled_noise = abs(self.noise.noise.get_noise_1d(self.time_passed))
-	print(sampled_noise)
 	self.energy = 0.5 + sampled_noise
 
 	# Wrap the value so it doesn't become so large that it loses precision.
