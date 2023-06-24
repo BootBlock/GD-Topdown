@@ -7,10 +7,10 @@ rough = true
 bounce = 0.25
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xju4n"]
-size = Vector2(59, 13)
+size = Vector2(12, 16)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xjrct"]
-size = Vector2(61, 15)
+size = Vector2(14, 18)
 
 [node name="Pickup" type="RigidBody2D"]
 collision_layer = 32
@@ -19,7 +19,7 @@ physics_material_override = SubResource("PhysicsMaterial_xjxsd")
 max_contacts_reported = 10
 contact_monitor = true
 linear_damp = 3.5
-angular_damp = 0.9
+angular_damp = 1.0
 script = ExtResource("1_3k4pd")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

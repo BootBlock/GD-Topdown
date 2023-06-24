@@ -10,7 +10,10 @@ signal item_thrown(player: Player)
 ## The image that represents the item within the world or displayed in the HUD.
 @export var world_image: Texture2D
 
-## Determines the stance the item places the player into.
+## The sound effect to play when the item is picked up.
+@export var pickup_sound: AudioStream
+
+## Determines the stance the item places the player into while actively holding the item.
 @export var stance: Player.stances
 
 @onready var pickup_scene = preload("res://Items/Pickups/Pickup.tscn")

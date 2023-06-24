@@ -1,5 +1,5 @@
 # Item.gd
-class_name Item extends Node2D
+class_name Item extends RigidBody2D
 
 ## The item has been thrown by the specified Player.
 signal item_thrown(player: Player)
@@ -9,6 +9,9 @@ signal item_thrown(player: Player)
 
 ## The image that represents the item within the world or displayed in the HUD.
 @export var world_image: Texture2D
+
+## The sound effect to play when the item is picked up.
+@export var pickup_sound: AudioStream
 
 ## Determines the stance the item places the player into.
 @export var stance: Player.stances
@@ -21,10 +24,6 @@ var player: Player
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta: float) -> void:
-	pass
 
 ## Drops the item to the ground.
 func drop() -> void:

@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Items/Weapons/Gun.gd" id="1_b3ilq"]
 [ext_resource type="PackedScene" uid="uid://duct7fde7hepc" path="res://Items/Weapons/GunSightDot.tscn" id="2_8owft"]
 
-[node name="Gun" type="Node2D"]
+[node name="Gun" type="RigidBody2D"]
 script = ExtResource("1_b3ilq")
 gun_sight = 1
 
