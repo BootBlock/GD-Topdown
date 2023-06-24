@@ -17,6 +17,7 @@ primary_fire_sound = ExtResource("3_q8kpf")
 reload_sound = ExtResource("4_t1r13")
 empty_sound = ExtResource("5_rgemk")
 world_image = ExtResource("6_dm2lk")
+pickup_sound = ExtResource("4_t1r13")
 stance = 1
 
 [node name="Sprite2D" parent="." index="0"]

@@ -5,14 +5,11 @@ class_name Pickup extends RigidBody2D
 @export var debug_output := false
 
 # Can't get the Item class to work, so using a PackedScene for now.
-## The backing Item that the pickup represents; when obtained, this is what the Player will be given.
+## The backing Item that the pickup represents; when obtained, this will be instantiated into the item field and  is what the Player will be given.
 @export var item_packedscene: PackedScene
 
-## Only works via code (e.g. creating a new instance of a Pickup from an existing Item).
-@export var item: Item
-
-## The sound effect to play when the item is picked up.
-@export var pickup_sound: AudioStream
+## An instantiated version of item_packedscene; can't seem to figure out how to allow the picking of Items via the inspector.
+var item: Item
 
 ## Don't allow pick-up by this player; used when dropping an item on the
 ## ground so that the player doesn't immediately pick it up again.
@@ -23,15 +20,15 @@ var sprite: Sprite2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	self.sprite = self.get_node("Sprite2D")
-	pass # Replace with function body.
+	if self.item == null:
+		self.item = item_packedscene.instantiate() as Item
 
-## Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(_delta: float) -> void:
-#	pass
+	self.sprite = self.get_node("Sprite2D")
 
 # Someone ran over the pickup.
 func _on_pickup_area_2d_area_entered(area: Area2D) -> void:
+	print(self.item)
+
 	self.debug(area.owner.name + " ran over the pickup.")
 
 	if not area.owner is Player:
@@ -51,8 +48,8 @@ func _on_pickup_area_2d_area_entered(area: Area2D) -> void:
 	tween.tween_property($Sprite2D, "modulate:a", 0.0, 0.5).set_ease(Tween.EASE_OUT)
 	tween.parallel().tween_property($Sprite2D, "scale", Vector2(3, 3), 0.4)
 
-	if self.pickup_sound:
-		$AudioStreamPlayer2D.stream = self.pickup_sound				# Node will be freed after sound finishes playing
+	if self.item.pickup_sound:
+		$AudioStreamPlayer2D.stream = self.item.pickup_sound				# Node will be freed after sound finishes playing
 		$AudioStreamPlayer2D.play()
 	else:
 		tween.tween_callback(self.queue_free)						# Node will be freed after the tween has finished

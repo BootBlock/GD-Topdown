@@ -92,11 +92,11 @@ func _on_animation_player_animation_finished(anim_name: String) -> void:
 
 ## Gives an item to the player.
 func give(pickup: Pickup) -> bool:
-	if pickup.item == null and pickup.item_packedscene == null:
+	if pickup.item == null:
 		print("Player got a pick-up but it didn't have an item/item_packedscene property set.")
 		return false
 
-	var pickup_item = pickup.item if pickup.item != null else pickup.item_packedscene.instantiate()
+	var pickup_item = pickup.item
 
 	if pickup_item is Gun:
 		# Remove any existing weapons from the player.
