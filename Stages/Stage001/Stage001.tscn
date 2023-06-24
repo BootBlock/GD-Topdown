@@ -1,16 +1,18 @@
-[gd_scene load_steps=18 format=3 uid="uid://d35pdg82bcapj"]
+[gd_scene load_steps=21 format=3 uid="uid://d35pdg82bcapj"]
 
 [ext_resource type="Script" path="res://Stages/Stage001/Stage001.gd" id="1_acegh"]
 [ext_resource type="Texture2D" uid="uid://b33014owmsk5p" path="res://Stages/Stage001/Stage001.png" id="1_cgkk4"]
 [ext_resource type="Script" path="res://Stages/StageConfig.gd" id="2_ero5e"]
 [ext_resource type="Texture2D" uid="uid://doo3nmswa6wd" path="res://Graphics/Particles/spotlight_1.png" id="3_wus2p"]
 [ext_resource type="PackedScene" uid="uid://gw0hxp12h2yx" path="res://Items/Weapons/Explosives/Landmine/Landmine.tscn" id="4_8pcix"]
+[ext_resource type="Texture2D" uid="uid://ceikr5o4p4df3" path="res://Graphics/Particles/spotlight_2.png" id="4_h7uk1"]
 [ext_resource type="PackedScene" uid="uid://fldsfa0iqdh5" path="res://Items/Environment/ExplosiveBarrel/ExplosiveBarrel.tscn" id="5_7l17j"]
 [ext_resource type="PackedScene" uid="uid://7ouemt2epwe" path="res://Items/Gameplay/PlayerSpawner.tscn" id="6_20n0o"]
 [ext_resource type="PackedScene" uid="uid://djs71q1phv5v8" path="res://HUD/PlayerHud.tscn" id="7_a6ciq"]
 [ext_resource type="PackedScene" uid="uid://cxil4t1bfqf0q" path="res://Items/Weapons/Projectiles/Pistol/PistolPickup.tscn" id="8_156f8"]
 [ext_resource type="PackedScene" uid="uid://cwhejb4n7s7m5" path="res://Items/Weapons/Projectiles/SniperRifle/SniperRiflePickup.tscn" id="9_qb0yk"]
 [ext_resource type="PackedScene" uid="uid://cioc03x5fmm0d" path="res://Objects/FlickeringLight.tscn" id="11_4o66v"]
+[ext_resource type="PackedScene" uid="uid://di2t0vdwmr2ay" path="res://Items/Weapons/Explosives/Grenade/GrenadePickup.tscn" id="12_3dkp5"]
 
 [sub_resource type="Resource" id="Resource_v6t8w"]
 script = ExtResource("2_ero5e")
@@ -30,6 +32,9 @@ size = Vector2(299, 173.5)
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_hcx5x"]
 polygon = PackedVector2Array(-50, 20, 12, -42, 15, -39, 17, -41, 25, -34, 23, -32, 36, -19, 38, -21, 46, -13, 43, -11, 46, -8, -16, 54, -20, 51, -22, 53, -29, 46, -27, 43, -40, 31, -42, 33, -49, 26, -47, 23)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_wbpan"]
+polygon = PackedVector2Array(491, 840, 540, 840, 542, 838, 548, 838, 550, 840, 567, 840, 565, 833, 569, 832, 571, 834, 572, 839, 605, 839, 622, 855, 622, 868, 623, 869, 623, 875, 622, 876, 622, 887, 604, 902, 573, 902, 571, 906, 569.003, 908, 565, 908, 567, 901, 550, 901, 548, 903, 542, 903, 540, 901, 490, 901, 471, 897, 463, 887, 462, 866, 465, 850, 473, 843)
 
 [node name="Stage" type="Node2D"]
 script = ExtResource("1_acegh")
@@ -87,6 +92,35 @@ polygon = PackedVector2Array(-52.2888, -21.3046, -52.3727, 26.7786, 40.9652, 26.
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="Environment/Dumpster01"]
 occluder = SubResource("OccluderPolygon2D_hcx5x")
+
+[node name="CarYellow" type="Node2D" parent="Environment"]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Environment/CarYellow"]
+collision_layer = 8
+collision_mask = 0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Environment/CarYellow/StaticBody2D"]
+polygon = PackedVector2Array(491, 840, 565, 840, 565, 832, 572, 832, 572, 839, 605, 839, 622, 855, 622, 887, 604, 902, 573, 902, 573, 908, 565, 908, 565, 901, 490, 901, 471, 897, 463, 887, 462, 866, 465, 850, 473, 843)
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="Environment/CarYellow"]
+occluder = SubResource("OccluderPolygon2D_wbpan")
+
+[node name="RearLeftPointLight2D2" type="PointLight2D" parent="Environment/CarYellow"]
+position = Vector2(461, 845)
+color = Color(1, 0, 0, 1)
+shadow_enabled = true
+shadow_color = Color(1, 0, 0, 0.156863)
+shadow_filter = 1
+texture = ExtResource("4_h7uk1")
+
+[node name="RearRightPointLight2D" type="PointLight2D" parent="Environment/CarYellow"]
+position = Vector2(462, 894)
+color = Color(1, 0, 0, 1)
+energy = 0.5
+shadow_enabled = true
+shadow_color = Color(1, 0, 0, 0.156863)
+shadow_filter = 1
+texture = ExtResource("4_h7uk1")
 
 [node name="Lighting" type="Node" parent="."]
 
@@ -165,4 +199,7 @@ linear_damp = 0.0
 angular_damp = 0.0
 
 [node name="FlickeringLight" parent="." instance=ExtResource("11_4o66v")]
-position = Vector2(683, 902)
+position = Vector2(682, 900)
+
+[node name="GrenadePickup" parent="." instance=ExtResource("12_3dkp5")]
+position = Vector2(28, 110)

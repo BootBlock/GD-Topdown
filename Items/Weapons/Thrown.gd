@@ -1,5 +1,5 @@
 # Thrown.gd
-extends RigidBody2D
+class_name Thrown extends RigidBody2D
 
 ## The item has been thrown by the specified Player.
 signal item_thrown(player: Player)

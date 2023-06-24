@@ -10,6 +10,9 @@ class_name EnvironmentItem extends RigidBody2D
 ## If the environmental item is explosive, determines how much force is applied to surrounding objects.
 @export var explosive_force: float = 0
 
+## The sound effect to play when the item explodes, if is_explosive is true.
+@export var explosion_sfx: AudioStream
+
 @onready var explosion_sprite: Sprite2D = $ExplosionSprite2D
 
 ## The item has been hit, but not destroyed.

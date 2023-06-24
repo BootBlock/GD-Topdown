@@ -1,5 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://tahn5oj8fhwe"]
+[gd_scene load_steps=3 format=3 uid="uid://tahn5oj8fhwe"]
 
 [ext_resource type="PackedScene" uid="uid://daj18g5xqy1vb" path="res://Items/Weapons/Thrown.tscn" id="1_82pmh"]
+[ext_resource type="Texture2D" uid="uid://cwnvmglmqaiqx" path="res://Items/Weapons/Explosives/Grenade/Grenade-Icon.png" id="2_jo7b7"]
 
-[node name="Thrown" instance=ExtResource("1_82pmh")]
+[node name="Grenade" instance=ExtResource("1_82pmh")]
+world_image = ExtResource("2_jo7b7")
+stance = 3
