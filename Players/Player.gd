@@ -3,7 +3,10 @@ class_name Player extends CharacterBody2D
 
 const ANIMATION_ANIM_LINE_FADE_OUT: String = "aim_line_fade_out"
 
-enum stances { none, pistol, rifle }
+enum stances {
+	## An idle stance; typically a neutral standing position.
+	none,
+	pistol, rifle, overhand_throw }
 
 @export var info: PlayerInfo
 @export var speed := 80
@@ -22,6 +25,7 @@ enum stances { none, pistol, rifle }
 @onready var aim_line_timer: Timer = $AimLineTimerFadeout
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 
+var throwables: Array[Thrown] = []
 var items: Array[Item] = []
 var active_item: Item
 

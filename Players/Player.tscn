@@ -62,6 +62,7 @@ _data = {
 
 [node name="Player" type="CharacterBody2D"]
 z_index = 50
+position = Vector2(2, 0)
 collision_mask = 15
 motion_mode = 1
 safe_margin = 0.2

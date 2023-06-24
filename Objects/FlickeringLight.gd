@@ -1,6 +1,10 @@
 # FlickeringLight.gd
 extends PointLight2D
 
+## The value at which time_passed should wrap back to zero so the number doesn't become so large that it loses precision.
+const TIME_PASSED_MAXIMUM_VALUE: int = 1000000
+
+## The noise that dictates the flickering effect of the light.
 @export var noise: NoiseTexture2D
 
 var time_passed: float = 0
@@ -17,5 +21,5 @@ func _process(delta: float) -> void:
 	self.energy = 0.5 + sampled_noise
 
 	# Wrap the value so it doesn't become so large that it loses precision.
-	if self.time_passed > 1000000:
+	if self.time_passed > self.TIME_PASSED_MAXIMUM_VALUE:
 		self.time_passed = 0

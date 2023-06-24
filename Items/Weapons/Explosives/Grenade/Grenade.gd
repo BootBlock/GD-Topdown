@@ -1,5 +1,5 @@
 # Grenade.gd
-extends RigidBody2D
+class_name Grenade extends Thrown
 
 ## Called when the node enters the scene tree for the first time.
 #func _ready() -> void:
