@@ -1,8 +1,8 @@
 [gd_scene load_steps=21 format=3 uid="uid://d35pdg82bcapj"]
 
-[ext_resource type="Script" path="res://Stages/Stage001/Stage001.gd" id="1_acegh"]
+[ext_resource type="Script" uid="uid://y7bh1r6rh5no" path="res://Stages/Stage001/Stage001.gd" id="1_acegh"]
 [ext_resource type="Texture2D" uid="uid://b33014owmsk5p" path="res://Stages/Stage001/Stage001.png" id="1_cgkk4"]
-[ext_resource type="Script" path="res://Stages/StageConfig.gd" id="2_ero5e"]
+[ext_resource type="Script" uid="uid://bfq176gc2tdem" path="res://Resources/stage_config_resource.gd" id="2_ero5e"]
 [ext_resource type="Texture2D" uid="uid://doo3nmswa6wd" path="res://Graphics/Particles/spotlight_1.png" id="3_wus2p"]
 [ext_resource type="PackedScene" uid="uid://gw0hxp12h2yx" path="res://Items/Weapons/Explosives/Landmine/Landmine.tscn" id="4_8pcix"]
 [ext_resource type="Texture2D" uid="uid://ceikr5o4p4df3" path="res://Graphics/Particles/spotlight_2.png" id="4_h7uk1"]

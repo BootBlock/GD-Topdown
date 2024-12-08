@@ -18,8 +18,8 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
-	self.sprite.rotation = 0					# Prevent the lens flare from rotating - except it doesn't work
-	self.lens_flare_sprite.rotation = 0			# ...
+	self.sprite.rotation = 0													# Prevent the lens flare from rotating - except it doesn't work
+	self.lens_flare_sprite.rotation = 0											# ...
 
 func _on_duration_timer_timeout() -> void:
 	self.animation_player.play(self.ANIMATION_FIZZLE_OUT)

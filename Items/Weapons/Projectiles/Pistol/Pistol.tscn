@@ -1,12 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://btijm4jaow6ya"]
+[gd_scene load_steps=7 format=3 uid="uid://btijm4jaow6ya"]
 
-[ext_resource type="Script" path="res://Items/Weapons/Projectiles/Pistol/Pistol.gd" id="1_75xia"]
+[ext_resource type="Script" uid="uid://bbelmd1yuxvsq" path="res://Items/Weapons/Projectiles/Pistol/Pistol.gd" id="1_75xia"]
 [ext_resource type="Texture2D" uid="uid://khdy8c3dsqe4" path="res://Items/Weapons/Projectiles/Pistol/Pistol.png" id="1_tg05o"]
 [ext_resource type="PackedScene" uid="uid://bcy18vd23cgvt" path="res://Items/Weapons/Gun.tscn" id="1_vwrly"]
 [ext_resource type="AudioStream" uid="uid://bkwwn08wc0h12" path="res://Sounds/Weapons/Pistol/PistolSilencedShot.ogg" id="3_q8kpf"]
 [ext_resource type="AudioStream" uid="uid://dnprddacqgocb" path="res://Sounds/Weapons/Pistol/PistolReload.ogg" id="4_t1r13"]
 [ext_resource type="AudioStream" uid="uid://ddjnuxwmy8t2b" path="res://Sounds/Weapons/Pistol/PistolEmptyClick.ogg" id="5_rgemk"]
-[ext_resource type="Texture2D" uid="uid://ygjkymgc2u42" path="res://Items/Weapons/Projectiles/Pistol/Pistol-Icon.png" id="6_dm2lk"]
 
 [node name="Pistol" instance=ExtResource("1_vwrly")]
 script = ExtResource("1_75xia")
@@ -16,9 +15,6 @@ gun_sight = 0
 primary_fire_sound = ExtResource("3_q8kpf")
 reload_sound = ExtResource("4_t1r13")
 empty_sound = ExtResource("5_rgemk")
-world_image = ExtResource("6_dm2lk")
-pickup_sound = ExtResource("4_t1r13")
-stance = 1
 
 [node name="Sprite2D" parent="." index="0"]
 position = Vector2(3, 0)

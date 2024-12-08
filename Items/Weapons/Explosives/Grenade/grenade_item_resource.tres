@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="ItemResource" load_steps=3 format=3 uid="uid://dlvqa0mbqv4dd"]
+
+[ext_resource type="Script" uid="uid://w8lcmnfwsv16" path="res://Resources/item_resource.gd" id="1_bkw7a"]
+[ext_resource type="Texture2D" uid="uid://cwnvmglmqaiqx" path="res://Items/Weapons/Explosives/Grenade/Grenade-Icon.png" id="2_cfhb4"]
+
+[resource]
+script = ExtResource("1_bkw7a")
+item_name = "Fragmentation Grenade"
+item_description = "A standard grenade that expells steel balls within a 5-metre area."
+world_image = ExtResource("2_cfhb4")
+stance = 0
+metadata/_custom_type_script = ExtResource("1_bkw7a")

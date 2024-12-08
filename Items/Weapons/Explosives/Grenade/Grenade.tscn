@@ -1,9 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://tahn5oj8fhwe"]
+[gd_scene load_steps=5 format=3 uid="uid://tahn5oj8fhwe"]
 
-[ext_resource type="PackedScene" uid="uid://daj18g5xqy1vb" path="res://Items/Weapons/Thrown.tscn" id="1_82pmh"]
-[ext_resource type="Script" path="res://Items/Weapons/Explosives/Grenade/Grenade.gd" id="2_2113m"]
-[ext_resource type="Texture2D" uid="uid://cwnvmglmqaiqx" path="res://Items/Weapons/Explosives/Grenade/Grenade-Icon.png" id="2_jo7b7"]
-[ext_resource type="AudioStream" uid="uid://dgwp5tulla12l" path="res://Sounds/Weapons/Grenade/GrenadePinPull.ogg" id="3_x6s2g"]
+[ext_resource type="PackedScene" uid="uid://daj18g5xqy1vb" path="res://Items/Weapons/thrown.tscn" id="1_82pmh"]
+[ext_resource type="Script" uid="uid://dxubymso3pkfp" path="res://Items/Weapons/Explosives/Grenade/Grenade.gd" id="2_2113m"]
+[ext_resource type="Resource" uid="uid://dlvqa0mbqv4dd" path="res://Items/Weapons/Explosives/Grenade/grenade_item_resource.tres" id="3_ldcwl"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_tb5cv"]
 friction = 0.35
@@ -12,6 +11,4 @@ bounce = 0.4
 [node name="Grenade" instance=ExtResource("1_82pmh")]
 physics_material_override = SubResource("PhysicsMaterial_tb5cv")
 script = ExtResource("2_2113m")
-world_image = ExtResource("2_jo7b7")
-pickup_sound = ExtResource("3_x6s2g")
-stance = 3
+item_resource = ExtResource("3_ldcwl")

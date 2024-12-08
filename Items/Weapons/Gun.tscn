@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://bcy18vd23cgvt"]
 
-[ext_resource type="Script" path="res://Items/Weapons/Gun.gd" id="1_b3ilq"]
+[ext_resource type="Script" uid="uid://c6uxp7pla50ax" path="res://Items/Weapons/Gun.gd" id="1_b3ilq"]
 [ext_resource type="PackedScene" uid="uid://duct7fde7hepc" path="res://Items/Weapons/GunSightDot.tscn" id="2_8owft"]
 
 [node name="Gun" type="RigidBody2D"]

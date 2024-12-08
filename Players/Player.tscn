@@ -1,7 +1,7 @@
 [gd_scene load_steps=13 format=3 uid="uid://bcpw780vlk7c7"]
 
-[ext_resource type="Script" path="res://Players/Player.gd" id="1_kd5br"]
-[ext_resource type="Script" path="res://Players/PlayerInfo.gd" id="2_6x38p"]
+[ext_resource type="Script" uid="uid://bksk2f8kesukn" path="res://Players/Player.gd" id="1_kd5br"]
+[ext_resource type="Script" uid="uid://bsuwrytbslr64" path="res://Resources/player_info_resource.gd" id="2_6x38p"]
 [ext_resource type="Texture2D" uid="uid://d2crqsr4wyq1g" path="res://Players/Player-01-Idle.png" id="3_obstu"]
 [ext_resource type="PackedScene" uid="uid://dju1sdhdnn143" path="res://Players/Name.tscn" id="5_ccnyb"]
 
@@ -56,8 +56,8 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_nemkg"]
 _data = {
-"aim_line_fade_in": SubResource("Animation_kdiml"),
-"aim_line_fade_out": SubResource("Animation_j0a6q")
+&"aim_line_fade_in": SubResource("Animation_kdiml"),
+&"aim_line_fade_out": SubResource("Animation_j0a6q")
 }
 
 [node name="Player" type="CharacterBody2D"]
@@ -104,7 +104,7 @@ one_shot = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_nemkg")
+&"": SubResource("AnimationLibrary_nemkg")
 }
 
 [node name="ThrowNode" type="Node2D" parent="."]

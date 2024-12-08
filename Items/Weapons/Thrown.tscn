@@ -1,11 +1,11 @@
 [gd_scene load_steps=3 format=3 uid="uid://daj18g5xqy1vb"]
 
-[ext_resource type="Script" path="res://Items/Weapons/Thrown.gd" id="1_8ba0q"]
+[ext_resource type="Script" uid="uid://dn5chqk7spftd" path="res://Items/Weapons/thrown.gd" id="1_a66e8"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_30ahk"]
 
 [node name="Thrown" type="RigidBody2D"]
-script = ExtResource("1_8ba0q")
+script = ExtResource("1_a66e8")
 
 [node name="RigidBodyCollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_30ahk")

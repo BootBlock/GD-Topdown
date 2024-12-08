@@ -9,23 +9,16 @@ signal item_thrown(player: Player)
 ## If true, debug information relating to the Item will be printed to the output if debug() is called.
 @export var debug_output := false
 
-## The image that represents the item within the world or displayed in the HUD.
-@export var world_image: Texture2D
-
-## The sound effect to play when the item is picked up.
-@export var pickup_sound: AudioStream
-
-## Determines the stance the item places the player into.
-@export var stance: Player.stances
+## The backing item being represented by the Item.
+@export var item_resource: ItemResource
 
 @onready var pickup_scene = preload("res://Items/Pickups/Pickup.tscn")
 
 ## Gets the Player that owns this instance.
 var player: Player
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	pass
 
 ## Drops the item to the ground.
 func drop() -> void:

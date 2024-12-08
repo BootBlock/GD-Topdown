@@ -1,9 +1,6 @@
 # Gun.gd
 class_name Gun extends Item
 
-enum fire_modes { Semiautomatic, Automatic, Burst }
-enum gun_sights { None, Dot, Full }
-
 # Signals
 ## The gun has been fired.
 signal gun_fired(ammo_count: int)
@@ -86,9 +83,8 @@ func _ready() -> void:
 	self.remaining_clips = self.maximum_number_of_clips - 1 if self.remaining_clips > 0 else self.remaining_clips
 	self.bullets_remaining_in_clip = self.bullets_per_clip
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
-	if self.gun_sight == gun_sights.Dot:		# This lot should be moved into the GunSightDot node
+	if self.gun_sight == gun_sights.Dot:		# TODO: This lot should be moved into the GunSightDot node
 		if self.raycast.is_colliding():
 			if !self.gunsight_dot_node.visible:
 				self.gunsight_dot_node.set_deferred("visible", true)
@@ -204,7 +200,7 @@ func _on_primary_fire_timer_timeout() -> void:
 		self.reload()
 
 func _on_secondary_fire_timer_timeout() -> void:
-	pass # Replace with function body.
+	pass
 
 func _on_reload_timer_timeout() -> void:
 	if self.maximum_number_of_clips > 0:
@@ -218,3 +214,6 @@ func _on_reload_timer_timeout() -> void:
 	self._update_ammo_display()
 
 	return
+
+enum fire_modes { Semiautomatic, Automatic, Burst }
+enum gun_sights { None, Dot, Full }
