@@ -27,7 +27,7 @@ func _ready() -> void:
 
 # Someone ran over the pickup.
 func _on_pickup_area_2d_area_entered(area: Area2D) -> void:
-	print(self.item)
+	print("_on_pickup_area_2d_area_entered: " + str(self.item))
 
 	self.debug(area.owner.name + " ran over the pickup.")
 
@@ -41,7 +41,7 @@ func _on_pickup_area_2d_area_entered(area: Area2D) -> void:
 	area.owner.give(self)
 
 	# Prevent the player from being unable to walk over the pickup.
-	if !self.get_collision_exceptions().has(area.owner):					# Surely layers/masks can do this? Can't seem to get it working, if so!
+	if !self.get_collision_exceptions().has(area.owner):						# Surely layers/masks can do this? Can't seem to get it working, if so!
 		self.add_collision_exception_with(area.owner)
 
 	var tween = get_tree().create_tween()
@@ -49,10 +49,10 @@ func _on_pickup_area_2d_area_entered(area: Area2D) -> void:
 	tween.parallel().tween_property($Sprite2D, "scale", Vector2(3, 3), 0.4)
 
 	if self.item.pickup_sound:
-		$AudioStreamPlayer2D.stream = self.item.pickup_sound				# Node will be freed after sound finishes playing
+		$AudioStreamPlayer2D.stream = self.item.pickup_sound					# Node will be freed after sound finishes playing
 		$AudioStreamPlayer2D.play()
 	else:
-		tween.tween_callback(self.queue_free)						# Node will be freed after the tween has finished
+		tween.tween_callback(self.queue_free)									# Node will be freed after the tween has finished
 
 func _on_audio_stream_player_2d_finished() -> void:
 	self.queue_free()

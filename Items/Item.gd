@@ -1,6 +1,8 @@
 # Item.gd
 class_name Item extends RigidBody2D
 
+# TODO: Create an ItemResource that this Item refers to; don't just bake properties into this class.
+
 ## The item has been thrown by the specified Player.
 signal item_thrown(player: Player)
 
@@ -61,13 +63,16 @@ func throw() -> void:
 # TODO: This should be moved into Pickup.gd.
 ## Repackage an existing item into a Pickup that can be dropped on the battlefield and picked up another time.
 func _create_pickup_for_item() -> Pickup:
+	if !self.pickup_scene:
+		return
+
 	var pickup = self.pickup_scene.instantiate() as Pickup
 
 	# Doesn't quite work as the values aren't the same (issue is either here or on pick-up?).
 
 	pickup.item = Utility.clone(self) as Item
 	pickup.position = self.player.position
-	pickup.linear_velocity = self.player.velocity * 10		# Make the throw more powerful based on the Player's speed.
+	pickup.linear_velocity = self.player.velocity * 10							# Make the throw more powerful based on the Player's speed.
 
 	return pickup
 
