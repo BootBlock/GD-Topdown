@@ -45,6 +45,9 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 	await get_tree().create_timer(0.2).timeout
 
 	for affected in self.within_blast_range:
+		if !affected:
+			continue
+
 		self.debug("  -> Blast affected: " + affected.owner.name)
 		var impulse_strength_at_centre = 52										# Requires tweaking
 
@@ -101,7 +104,7 @@ func _on_blast_range_area_area_entered(area: Area2D) -> void:
 		self.within_blast_range.append(area)
 
 func _on_blast_range_area_area_exited(area: Area2D) -> void:
-	if self.within_blast_range.has(area):
+	if self.within_blast_range.has(area) and area.owner:
 		self.debug("Exited blast area: " + area.owner.name)
 		self.within_blast_range.erase(area)
 

@@ -1,13 +1,17 @@
-[gd_scene load_steps=5 format=3 uid="uid://cwhejb4n7s7m5"]
+[gd_scene load_steps=4 format=3 uid="uid://cwhejb4n7s7m5"]
 
 [ext_resource type="PackedScene" uid="uid://cgnmnbh5kq1b0" path="res://Items/Pickups/Pickup.tscn" id="1_xh838"]
 [ext_resource type="PackedScene" uid="uid://c73uyup8rwif5" path="res://Items/Weapons/Projectiles/SniperRifle/SniperRifle.tscn" id="2_gojo8"]
 [ext_resource type="Texture2D" uid="uid://c6mm35hf07u0l" path="res://Items/Weapons/Projectiles/SniperRifle/SniperRifle-Icon.png" id="2_vaw0r"]
-[ext_resource type="AudioStream" uid="uid://rxisdxxtj8hg" path="res://Sounds/Weapons/Rifle/RifleReload.ogg" id="3_apkfv"]
 
 [node name="SniperRiflePickup" instance=ExtResource("1_xh838")]
 item_packedscene = ExtResource("2_gojo8")
-pickup_sound = ExtResource("3_apkfv")
 
 [node name="Sprite2D" parent="." index="0"]
 texture = ExtResource("2_vaw0r")
+
+[node name="RigidBodyCollisionShape2D" parent="." index="1"]
+position = Vector2(0.5, -0.5)
+
+[node name="PickupAreaCollisionShape2D" parent="PickupArea2D" index="0"]
+position = Vector2(0.5, -0.5)
